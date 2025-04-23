@@ -428,8 +428,8 @@ abstract public class DialectFeatureChecks {
 	public static class SupportsOrderByInCorrelatedSubquery implements DialectFeatureCheck {
 		public boolean apply(Dialect dialect) {
 			return dialect.supportsOrderByInSubquery()
-				// For some reason, HANA doesn't support order by in correlated subqueries...
-				&& !( dialect instanceof HANADialect );
+					// For some reason, HANA doesn't support order by in correlated subqueries...
+					&& !( dialect instanceof HANADialect );
 		}
 	}
 
@@ -460,15 +460,15 @@ abstract public class DialectFeatureChecks {
 	public static class SupportsStringAggregation implements DialectFeatureCheck {
 		public boolean apply(Dialect dialect) {
 			return dialect instanceof H2Dialect
-				|| dialect instanceof HSQLDialect
-				|| dialect instanceof MySQLDialect
-				|| dialect instanceof PostgreSQLDialect
-				|| dialect instanceof HANADialect
-				|| dialect instanceof CockroachDialect
-				|| dialect instanceof DB2Dialect
-				|| dialect instanceof OracleDialect
-				|| dialect instanceof SpannerDialect
-				|| dialect instanceof SQLServerDialect;
+					|| dialect instanceof HSQLDialect
+					|| dialect instanceof MySQLDialect
+					|| dialect instanceof PostgreSQLDialect
+					|| dialect instanceof HANADialect
+					|| dialect instanceof CockroachDialect
+					|| dialect instanceof DB2Dialect
+					|| dialect instanceof OracleDialect
+					|| dialect instanceof SpannerDialect
+					|| dialect instanceof SQLServerDialect;
 		}
 	}
 
@@ -564,7 +564,7 @@ abstract public class DialectFeatureChecks {
 		public boolean apply(Dialect dialect) {
 			try {
 				return dialect.getAggregateSupport() != null
-					&& dialect.getAggregateSupport().aggregateComponentCustomReadExpression(
+						&& dialect.getAggregateSupport().aggregateComponentCustomReadExpression(
 						"",
 						"",
 						"",
@@ -591,7 +591,7 @@ abstract public class DialectFeatureChecks {
 		public boolean apply(Dialect dialect) {
 			try {
 				return dialect.getAggregateSupport() != null
-					&& dialect.getAggregateSupport().aggregateComponentCustomReadExpression(
+						&& dialect.getAggregateSupport().aggregateComponentCustomReadExpression(
 						"",
 						"",
 						"",
@@ -618,7 +618,7 @@ abstract public class DialectFeatureChecks {
 		public boolean apply(Dialect dialect) {
 			try {
 				return dialect.getAggregateSupport() != null
-					&& dialect.getAggregateSupport().aggregateComponentCustomReadExpression(
+						&& dialect.getAggregateSupport().aggregateComponentCustomReadExpression(
 						"",
 						"",
 						"",
@@ -678,9 +678,9 @@ abstract public class DialectFeatureChecks {
 	public static class SupportsJsonQueryNestedPath implements DialectFeatureCheck {
 		public boolean apply(Dialect dialect) {
 			return definesFunction( dialect, "json_query" )
-				&& !( dialect instanceof SQLServerDialect )
-				&& !( dialect instanceof H2Dialect )
-				&& !( dialect instanceof CockroachDialect );
+					&& !( dialect instanceof SQLServerDialect )
+					&& !( dialect instanceof H2Dialect )
+					&& !( dialect instanceof CockroachDialect );
 		}
 	}
 
@@ -705,14 +705,14 @@ abstract public class DialectFeatureChecks {
 	public static class SupportsJsonValueErrorBehavior implements DialectFeatureCheck {
 		public boolean apply(Dialect dialect) {
 			return definesFunction( dialect, "json_value" )
-				// H2 emulation doesn't support error behavior
-				&& !( dialect instanceof H2Dialect )
-				// MariaDB simply doesn't support the on error and on empty clauses
-				&& !( dialect instanceof MariaDBDialect )
-				// Cockroach doesn't have a native json_value function
-				&& !( dialect instanceof CockroachDialect )
-				// PostgreSQL added support for native json_value in version 17
-				&& ( !( dialect instanceof PostgreSQLDialect ) || dialect.getVersion().isSameOrAfter( 17 ) );
+					// H2 emulation doesn't support error behavior
+					&& !( dialect instanceof H2Dialect )
+					// MariaDB simply doesn't support the on error and on empty clauses
+					&& !( dialect instanceof MariaDBDialect )
+					// Cockroach doesn't have a native json_value function
+					&& !( dialect instanceof CockroachDialect )
+					// PostgreSQL added support for native json_value in version 17
+					&& ( !( dialect instanceof PostgreSQLDialect ) || dialect.getVersion().isSameOrAfter( 17 ) );
 		}
 	}
 
@@ -725,8 +725,8 @@ abstract public class DialectFeatureChecks {
 	public static class SupportsJsonObjectAgg implements DialectFeatureCheck {
 		public boolean apply(Dialect dialect) {
 			return definesFunction( dialect, "json_objectagg" )
-				// Bug in HSQL: https://sourceforge.net/p/hsqldb/bugs/1718/
-				&& !( dialect instanceof HSQLDialect );
+					// Bug in HSQL: https://sourceforge.net/p/hsqldb/bugs/1718/
+					&& !( dialect instanceof HSQLDialect );
 		}
 	}
 
@@ -1018,8 +1018,8 @@ abstract public class DialectFeatureChecks {
 		@Override
 		public boolean apply(Dialect dialect) {
 			return !(dialect instanceof SybaseASEDialect aseDialect)
-				// The jconn driver apparently doesn't support unicode characters
-				|| aseDialect.getDriverKind() == SybaseDriverKind.JTDS;
+					// The jconn driver apparently doesn't support unicode characters
+					|| aseDialect.getDriverKind() == SybaseDriverKind.JTDS;
 		}
 	}
 

@@ -7,7 +7,6 @@ package org.hibernate.orm.test.function.json;
 import org.hibernate.cfg.QuerySettings;
 import org.hibernate.dialect.GaussDBDialect;
 
-import org.hibernate.dialect.GaussDBDialect;
 import org.hibernate.testing.orm.junit.DialectFeatureChecks;
 import org.hibernate.testing.orm.junit.DomainModel;
 import org.hibernate.testing.orm.junit.RequiresDialectFeature;
@@ -43,7 +42,7 @@ public class JsonArrayTest {
 	public void testNullClause(SessionFactoryScope scope) {
 		scope.inSession( em -> {
 			//tag::hql-json-array-on-null-example[]
-			em.createQuery( "select json_array(null, 1 null on null)" ).getResultList();
+			em.createQuery("select json_array(null, 1 null on null)" ).getResultList();
 			//end::hql-json-array-on-null-example[]
 		} );
 	}
@@ -51,7 +50,7 @@ public class JsonArrayTest {
 	@Test
 	public void testAbsentOnNull(SessionFactoryScope scope) {
 		scope.inSession( em -> {
-			em.createQuery( "select json_array(null, 1 absent on null)" ).getResultList();
+			em.createQuery("select json_array(null, 1 absent on null)" ).getResultList();
 		} );
 	}
 

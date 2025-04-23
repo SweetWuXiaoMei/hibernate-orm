@@ -20,8 +20,8 @@ import org.junit.jupiter.api.Test;
  * @author Andrey Vlasov
  * @author Steve Ebersole
  */
-@RequiresDialectFeature(feature = DialectFeatureChecks.SupportsIdentityColumns.class)
-@DomainModel(annotatedClasses = Sub.class)
+@RequiresDialectFeature( feature = DialectFeatureChecks.SupportsIdentityColumns.class )
+@DomainModel( annotatedClasses = Sub.class )
 @SessionFactory
 public class JoinedSubclassHierarchyWithIdentityGenerationTest {
 	@Test

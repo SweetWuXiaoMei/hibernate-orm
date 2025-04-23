@@ -4,19 +4,6 @@
  */
 package org.hibernate.orm.test.annotations.mapsid;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.hibernate.dialect.GaussDBDialect;
-
-import org.hibernate.testing.orm.junit.DialectFeatureChecks;
-import org.hibernate.testing.orm.junit.DomainModel;
-import org.hibernate.testing.orm.junit.RequiresDialectFeature;
-import org.hibernate.testing.orm.junit.SessionFactory;
-import org.hibernate.testing.orm.junit.SessionFactoryScope;
-import org.hibernate.testing.orm.junit.SkipForDialect;
-import org.junit.jupiter.api.Test;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,31 +15,40 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
+import org.hibernate.testing.orm.junit.DialectFeatureChecks;
+import org.hibernate.testing.orm.junit.DomainModel;
+import org.hibernate.testing.orm.junit.RequiresDialectFeature;
+import org.hibernate.testing.orm.junit.SessionFactory;
+import org.hibernate.testing.orm.junit.SessionFactoryScope;
+import org.hibernate.testing.orm.junit.SkipForDialect;
+import org.hibernate.dialect.GaussDBDialect;
+import org.junit.jupiter.api.Test;
 
-import static jakarta.persistence.CascadeType.MERGE;
-import static jakarta.persistence.CascadeType.PERSIST;
-import static jakarta.persistence.CascadeType.REMOVE;
+import java.util.HashSet;
+import java.util.Set;
+
+import static jakarta.persistence.CascadeType.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SessionFactory
 @RequiresDialectFeature(feature = DialectFeatureChecks.SupportsIdentityColumns.class)
-@DomainModel(annotatedClasses = { MapsIdClassTest.User.class, MapsIdClassTest.UserAuthority.class })
+@DomainModel(annotatedClasses ={MapsIdClassTest.User.class, MapsIdClassTest.UserAuthority.class})
 public class MapsIdClassTest {
 
 	@Test
 	@SkipForDialect(dialectClass = GaussDBDialect.class, reason = "opengauss don't support")
 	void test(SessionFactoryScope scope) {
-		scope.inTransaction( s -> {
+		scope.inTransaction( s-> {
 			User ue = new User();
-			ue.setName( "Gavin" );
+			ue.setName("Gavin");
 			UserAuthority uae = new UserAuthority();
-			ue.addUserAuthority( uae );
-			uae.setUser( ue );
-			uae.setAuthority( "God" );
-			s.persist( ue );
+			ue.addUserAuthority(uae);
+			uae.setUser(ue);
+			uae.setAuthority("God");
+			s.persist(ue);
 			s.flush();
 			assertEquals( ue.id, uae.userId );
-		} );
+		});
 
 	}
 
@@ -81,13 +77,13 @@ public class MapsIdClassTest {
 		}
 
 		@OneToMany(
-				cascade = { PERSIST, MERGE, REMOVE },
+				cascade = {PERSIST, MERGE, REMOVE},
 				mappedBy = "user",
 				orphanRemoval = true)
 		private Set<UserAuthority> userAuthorities = new HashSet<>();
 
 		public void addUserAuthority(UserAuthority userAuthority) {
-			this.userAuthorities.add( userAuthority );
+			this.userAuthorities.add(userAuthority);
 		}
 	}
 

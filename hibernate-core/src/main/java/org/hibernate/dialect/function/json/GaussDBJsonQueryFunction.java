@@ -19,9 +19,9 @@ import java.util.Map;
 /**
  * PostgreSQL json_query function.
  */
-public class GaussdbJsonQueryFunction extends JsonQueryFunction {
+public class GaussDBJsonQueryFunction extends JsonQueryFunction {
 
-	public GaussdbJsonQueryFunction(TypeConfiguration typeConfiguration) {
+	public GaussDBJsonQueryFunction(TypeConfiguration typeConfiguration) {
 		super( typeConfiguration, true, true );
 	}
 

@@ -55,50 +55,46 @@ public class WrapperArrayHandlingLegacyTests {
 				.getRuntimeMetamodels()
 				.getMappingMetamodel();
 		final JdbcTypeRegistry jdbcTypeRegistry = mappingMetamodel.getTypeConfiguration().getJdbcTypeRegistry();
-		final EntityPersister entityDescriptor = mappingMetamodel.getEntityDescriptor( WrapperArrayHandlingLegacyTests.EntityOfByteArrays.class );
+		final EntityPersister entityDescriptor = mappingMetamodel.getEntityDescriptor( WrapperArrayHandlingLegacyTests.EntityOfByteArrays.class);
 
 		{
-			final BasicAttributeMapping primitive = (BasicAttributeMapping) entityDescriptor.findAttributeMapping(
-					"primitive" );
+			final BasicAttributeMapping primitive = (BasicAttributeMapping) entityDescriptor.findAttributeMapping("primitive");
 			final JdbcMapping jdbcMapping = primitive.getJdbcMapping();
-			assertThat( jdbcMapping.getJavaTypeDescriptor().getJavaTypeClass(), equalTo( byte[].class ) );
+			assertThat(jdbcMapping.getJavaTypeDescriptor().getJavaTypeClass(), equalTo(byte[].class));
 			assertThat( jdbcMapping.getJdbcType(), equalTo( jdbcTypeRegistry.getDescriptor( Types.VARBINARY ) ) );
 		}
 
 		{
-			final BasicAttributeMapping primitive = (BasicAttributeMapping) entityDescriptor.findAttributeMapping(
-					"wrapper" );
+			final BasicAttributeMapping primitive = (BasicAttributeMapping) entityDescriptor.findAttributeMapping("wrapper");
 			final JdbcMapping jdbcMapping = primitive.getJdbcMapping();
-			assertThat( jdbcMapping.getJavaTypeDescriptor().getJavaTypeClass(), equalTo( Byte[].class ) );
+			assertThat(jdbcMapping.getJavaTypeDescriptor().getJavaTypeClass(), equalTo(Byte[].class));
 			assertThat( jdbcMapping.getJdbcType(), equalTo( jdbcTypeRegistry.getDescriptor( Types.VARBINARY ) ) );
 		}
 
 		{
-			final BasicAttributeMapping primitive = (BasicAttributeMapping) entityDescriptor.findAttributeMapping(
-					"primitiveLob" );
+			final BasicAttributeMapping primitive = (BasicAttributeMapping) entityDescriptor.findAttributeMapping("primitiveLob");
 			final JdbcMapping jdbcMapping = primitive.getJdbcMapping();
-			assertThat( jdbcMapping.getJavaTypeDescriptor().getJavaTypeClass(), equalTo( byte[].class ) );
+			assertThat(jdbcMapping.getJavaTypeDescriptor().getJavaTypeClass(), equalTo(byte[].class));
 			assertThat( jdbcMapping.getJdbcType(), equalTo( jdbcTypeRegistry.getDescriptor( Types.BLOB ) ) );
 		}
 
 		{
-			final BasicAttributeMapping primitive = (BasicAttributeMapping) entityDescriptor.findAttributeMapping(
-					"wrapperLob" );
+			final BasicAttributeMapping primitive = (BasicAttributeMapping) entityDescriptor.findAttributeMapping("wrapperLob");
 			final JdbcMapping jdbcMapping = primitive.getJdbcMapping();
-			assertThat( jdbcMapping.getJavaTypeDescriptor().getJavaTypeClass(), equalTo( Byte[].class ) );
+			assertThat(jdbcMapping.getJavaTypeDescriptor().getJavaTypeClass(), equalTo(Byte[].class));
 			assertThat( jdbcMapping.getJdbcType(), equalTo( jdbcTypeRegistry.getDescriptor( Types.BLOB ) ) );
 		}
 
 		scope.inTransaction(
 				(session) -> {
 					session.persist(
-							new EntityOfByteArrays( 1, "abc".getBytes(), new Byte[] { (byte) 1 } )
+							new EntityOfByteArrays( 1, "abc".getBytes(), new Byte[] { (byte) 1 })
 					);
 				}
 		);
 
 		scope.inTransaction(
-				(session) -> session.get( EntityOfByteArrays.class, 1 )
+				(session) -> session.get( EntityOfByteArrays.class, 1)
 		);
 	}
 
@@ -108,35 +104,31 @@ public class WrapperArrayHandlingLegacyTests {
 				.getRuntimeMetamodels()
 				.getMappingMetamodel();
 		final JdbcTypeRegistry jdbcRegistry = mappingMetamodel.getTypeConfiguration().getJdbcTypeRegistry();
-		final EntityPersister entityDescriptor = mappingMetamodel.getEntityDescriptor( WrapperArrayHandlingLegacyTests.EntityWithCharArrays.class );
+		final EntityPersister entityDescriptor = mappingMetamodel.getEntityDescriptor( WrapperArrayHandlingLegacyTests.EntityWithCharArrays.class);
 
 		{
-			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping(
-					"primitive" );
+			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping("primitive");
 			final JdbcMapping jdbcMapping = attributeMapping.getJdbcMapping();
-			assertThat( jdbcMapping.getJdbcType(), equalTo( jdbcRegistry.getDescriptor( Types.VARCHAR ) ) );
+			assertThat( jdbcMapping.getJdbcType(), equalTo( jdbcRegistry.getDescriptor( Types.VARCHAR)));
 		}
 
 		{
-			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping(
-					"wrapper" );
+			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping("wrapper");
 			final JdbcMapping jdbcMapping = attributeMapping.getJdbcMapping();
-			assertThat( jdbcMapping.getJdbcType(), equalTo( jdbcRegistry.getDescriptor( Types.VARCHAR ) ) );
+			assertThat( jdbcMapping.getJdbcType(), equalTo( jdbcRegistry.getDescriptor( Types.VARCHAR)));
 		}
 
 
 		{
-			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping(
-					"primitiveClob" );
+			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping("primitiveClob");
 			final JdbcMapping jdbcMapping = attributeMapping.getJdbcMapping();
-			assertThat( jdbcMapping.getJdbcType(), equalTo( jdbcRegistry.getDescriptor( Types.CLOB ) ) );
+			assertThat( jdbcMapping.getJdbcType(), equalTo( jdbcRegistry.getDescriptor( Types.CLOB)));
 		}
 
 		{
-			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping(
-					"wrapperClob" );
+			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping("wrapperClob");
 			final JdbcMapping jdbcMapping = attributeMapping.getJdbcMapping();
-			assertThat( jdbcMapping.getJdbcType(), equalTo( jdbcRegistry.getDescriptor( Types.CLOB ) ) );
+			assertThat( jdbcMapping.getJdbcType(), equalTo( jdbcRegistry.getDescriptor( Types.CLOB)));
 		}
 	}
 
@@ -146,51 +138,35 @@ public class WrapperArrayHandlingLegacyTests {
 				.getRuntimeMetamodels()
 				.getMappingMetamodel();
 		final EntityPersister entityDescriptor = mappingMetamodel.getEntityDescriptor(
-				WrapperArrayHandlingLegacyTests.EntityWithCharArrays.class );
+				WrapperArrayHandlingLegacyTests.EntityWithCharArrays.class);
 		final JdbcTypeRegistry jdbcTypeRegistry = mappingMetamodel.getTypeConfiguration().getJdbcTypeRegistry();
 
 		final Dialect dialect = scope.getSessionFactory().getJdbcServices().getDialect();
 		final NationalizationSupport nationalizationSupport = dialect.getNationalizationSupport();
 
 		{
-			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping(
-					"primitiveNVarchar" );
+			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping("primitiveNVarchar");
 			final JdbcMapping jdbcMapping = attributeMapping.getJdbcMapping();
-			assertThat(
-					jdbcMapping.getJdbcType(),
-					is( jdbcTypeRegistry.getDescriptor( nationalizationSupport.getVarcharVariantCode() ) )
-			);
+			assertThat( jdbcMapping.getJdbcType(), is( jdbcTypeRegistry.getDescriptor( nationalizationSupport.getVarcharVariantCode())));
 		}
 
 		{
-			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping(
-					"wrapperNVarchar" );
+			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping("wrapperNVarchar");
 			final JdbcMapping jdbcMapping = attributeMapping.getJdbcMapping();
-			assertThat(
-					jdbcMapping.getJdbcType(),
-					is( jdbcTypeRegistry.getDescriptor( nationalizationSupport.getVarcharVariantCode() ) )
-			);
+			assertThat( jdbcMapping.getJdbcType(), is( jdbcTypeRegistry.getDescriptor( nationalizationSupport.getVarcharVariantCode())));
 		}
 
 
 		{
-			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping(
-					"primitiveNClob" );
+			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping("primitiveNClob");
 			final JdbcMapping jdbcMapping = attributeMapping.getJdbcMapping();
-			assertThat(
-					jdbcMapping.getJdbcType(),
-					is( jdbcTypeRegistry.getDescriptor( nationalizationSupport.getClobVariantCode() ) )
-			);
+			assertThat( jdbcMapping.getJdbcType(), is( jdbcTypeRegistry.getDescriptor( nationalizationSupport.getClobVariantCode())));
 		}
 
 		{
-			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping(
-					"wrapperNClob" );
+			final BasicAttributeMapping attributeMapping = (BasicAttributeMapping) entityDescriptor.findAttributeMapping("wrapperNClob");
 			final JdbcMapping jdbcMapping = attributeMapping.getJdbcMapping();
-			assertThat(
-					jdbcMapping.getJdbcType(),
-					is( jdbcTypeRegistry.getDescriptor( nationalizationSupport.getClobVariantCode() ) )
-			);
+			assertThat( jdbcMapping.getJdbcType(), is( jdbcTypeRegistry.getDescriptor( nationalizationSupport.getClobVariantCode())));
 		}
 	}
 
@@ -199,8 +175,8 @@ public class WrapperArrayHandlingLegacyTests {
 	public void dropTestData(SessionFactoryScope scope) {
 		scope.inTransaction(
 				(session) -> {
-					session.createMutationQuery( "delete EntityOfByteArrays" ).executeUpdate();
-					session.createMutationQuery( "delete EntityWithCharArrays" ).executeUpdate();
+					session.createMutationQuery("delete EntityOfByteArrays").executeUpdate();
+					session.createMutationQuery("delete EntityWithCharArrays").executeUpdate();
 				}
 		);
 	}
@@ -234,12 +210,7 @@ public class WrapperArrayHandlingLegacyTests {
 			this.wrapperLob = wrapper;
 		}
 
-		public EntityOfByteArrays(
-				Integer id,
-				byte[] primitive,
-				Byte[] wrapper,
-				byte[] primitiveLob,
-				Byte[] wrapperLob) {
+		public EntityOfByteArrays(Integer id, byte[] primitive, Byte[] wrapper, byte[] primitiveLob, Byte[] wrapperLob) {
 			this.id = id;
 			this.primitive = primitive;
 			this.wrapper = wrapper;
@@ -247,7 +218,6 @@ public class WrapperArrayHandlingLegacyTests {
 			this.wrapperLob = wrapperLob;
 		}
 	}
-
 	@Entity(name = "EntityWithCharArrays")
 	@Table(name = "EntityWithCharArrays")
 	public static class EntityWithCharArrays {

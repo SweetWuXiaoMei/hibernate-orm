@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 @DomainModel
 @SessionFactory
 @ServiceRegistry(settings = @Setting(name = QuerySettings.XML_FUNCTIONS_ENABLED, value = "true"))
-@RequiresDialectFeature(feature = DialectFeatureChecks.SupportsXmlconcat.class)
+@RequiresDialectFeature( feature = DialectFeatureChecks.SupportsXmlconcat.class)
 public class XmlConcatTest {
 
 	@Test

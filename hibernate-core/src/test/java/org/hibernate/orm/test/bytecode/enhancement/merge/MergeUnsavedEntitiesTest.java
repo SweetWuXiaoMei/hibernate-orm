@@ -102,7 +102,7 @@ public class MergeUnsavedEntitiesTest {
 		scope.inTransaction(
 				session -> {
 					Parent parent = session.find( Parent.class, 1l );
-					assertThat( parent.getChildren() ).isEmpty();
+					assertThat( parent.getChildren()).isEmpty();
 				}
 		);
 	}

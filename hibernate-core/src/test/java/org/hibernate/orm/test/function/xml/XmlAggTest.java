@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 @DomainModel(standardModels = StandardDomainModel.GAMBIT)
 @SessionFactory
 @ServiceRegistry(settings = @Setting(name = QuerySettings.XML_FUNCTIONS_ENABLED, value = "true"))
-@RequiresDialectFeature(feature = DialectFeatureChecks.SupportsXmlagg.class)
+@RequiresDialectFeature( feature = DialectFeatureChecks.SupportsXmlagg.class)
 public class XmlAggTest {
 
 	@Test
@@ -32,8 +32,7 @@ public class XmlAggTest {
 	public void testSimple(SessionFactoryScope scope) {
 		scope.inSession( em -> {
 			//tag::hql-xmlagg-example[]
-			em.createQuery( "select xmlagg(xmlelement(name a, e.theString) order by e.id) from EntityOfBasics e" )
-					.getResultList();
+			em.createQuery( "select xmlagg(xmlelement(name a, e.theString) order by e.id) from EntityOfBasics e" ).getResultList();
 			//end::hql-xmlagg-example[]
 		} );
 	}

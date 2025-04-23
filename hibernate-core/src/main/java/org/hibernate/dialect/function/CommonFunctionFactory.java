@@ -1469,7 +1469,7 @@ public class CommonFunctionFactory {
 				.setUseParenthesesWhenNoArgs( false )
 				.register();
 		functionRegistry.noArgsBuilder( "local_datetime", "localtimestamp" )
-				.setInvariantType ( basicTypeRegistry.resolve( StandardBasicTypes.LOCAL_DATE_TIME ) )
+				.setInvariantType( basicTypeRegistry.resolve( StandardBasicTypes.LOCAL_DATE_TIME ) )
 				.setUseParenthesesWhenNoArgs( false )
 				.register();
 	}
@@ -3509,7 +3509,7 @@ public class CommonFunctionFactory {
 	 * GaussDB json_query() function
 	 */
 	public void jsonQuery_gaussdb() {
-		functionRegistry.register( "json_query", new GaussdbJsonQueryFunction( typeConfiguration ) );
+		functionRegistry.register( "json_query", new GaussDBJsonQueryFunction( typeConfiguration ) );
 	}
 
 	/**
@@ -3579,7 +3579,7 @@ public class CommonFunctionFactory {
 	 * json_exists() function
 	 */
 	public void jsonExists_gaussdb() {
-		functionRegistry.register( "json_exists", new GaussdbJsonExistsFunction( typeConfiguration, false, false ) );
+		functionRegistry.register( "json_exists", new GaussDBJsonExistsFunction( typeConfiguration, false, false ) );
 	}
 
 	/**

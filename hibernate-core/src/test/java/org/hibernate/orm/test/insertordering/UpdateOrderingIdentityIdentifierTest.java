@@ -6,23 +6,6 @@ package org.hibernate.orm.test.insertordering;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.hibernate.FlushMode;
-import org.hibernate.Session;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-import org.hibernate.cfg.AvailableSettings;
-import org.hibernate.dialect.GaussDBDialect;
-
-import org.hibernate.testing.orm.junit.DialectFeatureChecks;
-import org.hibernate.testing.orm.junit.EntityManagerFactoryScope;
-import org.hibernate.testing.orm.junit.JiraKey;
-import org.hibernate.testing.orm.junit.Jpa;
-import org.hibernate.testing.orm.junit.RequiresDialectFeature;
-import org.hibernate.testing.orm.junit.Setting;
-import org.hibernate.testing.orm.junit.SkipForDialect;
-import org.junit.jupiter.api.Test;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -33,6 +16,22 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+
+import org.hibernate.FlushMode;
+import org.hibernate.Session;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+import org.hibernate.cfg.AvailableSettings;
+
+import org.hibernate.testing.orm.junit.JiraKey;
+import org.hibernate.testing.orm.junit.DialectFeatureChecks;
+import org.hibernate.testing.orm.junit.EntityManagerFactoryScope;
+import org.hibernate.testing.orm.junit.Jpa;
+import org.hibernate.testing.orm.junit.RequiresDialectFeature;
+import org.hibernate.testing.orm.junit.Setting;
+import org.hibernate.testing.orm.junit.SkipForDialect;
+import org.hibernate.dialect.GaussDBDialect;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Chris Cranford

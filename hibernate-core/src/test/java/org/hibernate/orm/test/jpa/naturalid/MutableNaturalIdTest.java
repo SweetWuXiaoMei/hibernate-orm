@@ -5,13 +5,14 @@
 package org.hibernate.orm.test.jpa.naturalid;
 
 import org.hibernate.community.dialect.AltibaseDialect;
-import org.hibernate.dialect.GaussDBDialect;
 import org.hibernate.dialect.HANADialect;
 import org.hibernate.dialect.OracleDialect;
-import org.hibernate.orm.test.jpa.model.AbstractJPATest;
 
 import org.hibernate.testing.orm.junit.JiraKey;
 import org.hibernate.testing.orm.junit.SkipForDialect;
+import org.hibernate.dialect.GaussDBDialect;
+import org.hibernate.orm.test.jpa.model.AbstractJPATest;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;

@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 @DomainModel(standardModels = StandardDomainModel.GAMBIT)
 @SessionFactory
 @ServiceRegistry(settings = @Setting(name = QuerySettings.JSON_FUNCTIONS_ENABLED, value = "true"))
-@RequiresDialectFeature(feature = DialectFeatureChecks.SupportsJsonRemove.class)
+@RequiresDialectFeature( feature = DialectFeatureChecks.SupportsJsonRemove.class)
 public class JsonRemoveTest {
 
 	@Test

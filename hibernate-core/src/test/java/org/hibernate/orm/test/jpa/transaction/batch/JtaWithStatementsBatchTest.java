@@ -6,18 +6,18 @@ package org.hibernate.orm.test.jpa.transaction.batch;
 
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.BatchSettings;
-import org.hibernate.dialect.GaussDBDialect;
 import org.hibernate.orm.test.jpa.transaction.JtaPlatformSettingProvider;
 
+import org.hibernate.testing.orm.junit.JiraKey;
 import org.hibernate.testing.jta.TestingJtaPlatformImpl;
 import org.hibernate.testing.orm.junit.DialectFeatureChecks;
 import org.hibernate.testing.orm.junit.EntityManagerFactoryScope;
-import org.hibernate.testing.orm.junit.JiraKey;
 import org.hibernate.testing.orm.junit.Jpa;
 import org.hibernate.testing.orm.junit.RequiresDialectFeature;
 import org.hibernate.testing.orm.junit.Setting;
 import org.hibernate.testing.orm.junit.SettingProvider;
 import org.hibernate.testing.orm.junit.SkipForDialect;
+import org.hibernate.dialect.GaussDBDialect;
 import org.junit.jupiter.api.Test;
 
 import jakarta.persistence.FlushModeType;

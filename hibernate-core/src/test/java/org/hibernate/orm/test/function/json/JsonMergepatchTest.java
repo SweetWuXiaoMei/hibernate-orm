@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 @DomainModel(standardModels = StandardDomainModel.GAMBIT)
 @SessionFactory
 @ServiceRegistry(settings = @Setting(name = QuerySettings.JSON_FUNCTIONS_ENABLED, value = "true"))
-@RequiresDialectFeature(feature = DialectFeatureChecks.SupportsJsonMergepatch.class)
+@RequiresDialectFeature( feature = DialectFeatureChecks.SupportsJsonMergepatch.class)
 public class JsonMergepatchTest {
 
 	@Test

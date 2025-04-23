@@ -36,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 @DomainModel(annotatedClasses = EntityWithJson.class)
 @SessionFactory
 @ServiceRegistry(settings = @Setting(name = QuerySettings.JSON_FUNCTIONS_ENABLED, value = "true"))
-@RequiresDialectFeature(feature = DialectFeatureChecks.SupportsJsonExists.class)
+@RequiresDialectFeature( feature = DialectFeatureChecks.SupportsJsonExists.class)
 public class JsonExistsTest {
 
 	@BeforeEach
@@ -51,7 +51,7 @@ public class JsonExistsTest {
 			entity.getJson().put( "theNull", null );
 			entity.getJson().put( "theArray", new String[] { "a", "b", "c" } );
 			entity.getJson().put( "theObject", new HashMap<>( entity.getJson() ) );
-			em.persist( entity );
+			em.persist(entity);
 		} );
 	}
 
@@ -67,10 +67,7 @@ public class JsonExistsTest {
 	public void testSimple(SessionFactoryScope scope) {
 		scope.inSession( em -> {
 			//tag::hql-json-exists-example[]
-			List<Boolean> results = em.createQuery(
-							"select json_exists(e.json, '$.theString') from EntityWithJson e",
-							Boolean.class
-					)
+			List<Boolean> results = em.createQuery( "select json_exists(e.json, '$.theString') from EntityWithJson e", Boolean.class )
 					.getResultList();
 			//end::hql-json-exists-example[]
 			assertEquals( 1, results.size() );
@@ -83,10 +80,7 @@ public class JsonExistsTest {
 	public void testPassing(SessionFactoryScope scope) {
 		scope.inSession( em -> {
 			//tag::hql-json-exists-passing-example[]
-			List<Boolean> results = em.createQuery(
-							"select json_exists(e.json, '$.theArray[$idx]' passing 1 as idx) from EntityWithJson e",
-							Boolean.class
-					)
+			List<Boolean> results = em.createQuery( "select json_exists(e.json, '$.theArray[$idx]' passing 1 as idx) from EntityWithJson e", Boolean.class )
 					.getResultList();
 			//end::hql-json-exists-passing-example[]
 			assertEquals( 1, results.size() );
@@ -99,12 +93,12 @@ public class JsonExistsTest {
 		scope.inSession( em -> {
 			try {
 				//tag::hql-json-exists-on-error-example[]
-				em.createQuery( "select json_exists('invalidJson', '$.theInt' error on error) from EntityWithJson e" )
+				em.createQuery( "select json_exists('invalidJson', '$.theInt' error on error) from EntityWithJson e")
 						.getResultList();
 				//end::hql-json-exists-on-error-example[]
-				fail( "error clause should fail because of invalid json document" );
+				fail("error clause should fail because of invalid json document");
 			}
-			catch (HibernateException e) {
+			catch ( HibernateException e ) {
 				if ( !( e instanceof JDBCException ) && !( e instanceof ExecutionException ) ) {
 					throw e;
 				}

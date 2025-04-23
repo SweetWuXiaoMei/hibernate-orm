@@ -51,19 +51,19 @@ import static org.hibernate.generator.EventTypeSets.INSERT_ONLY;
 /**
  * @author Marco Belladelli
  */
-@DomainModel(annotatedClasses = {
+@DomainModel( annotatedClasses = {
 		MixedTimingGeneratorsTest.AssignedEntity.class,
 		MixedTimingGeneratorsTest.RandomEntity.class,
 		MixedTimingGeneratorsTest.StringGeneratedEntity.class,
-})
+} )
 @SessionFactory
-@RequiresDialectFeature(feature = DialectFeatureChecks.SupportsIdentityColumns.class)
-@Jira("https://hibernate.atlassian.net/browse/HHH-17322")
+@RequiresDialectFeature( feature = DialectFeatureChecks.SupportsIdentityColumns.class )
+@Jira( "https://hibernate.atlassian.net/browse/HHH-17322" )
 public class MixedTimingGeneratorsTest {
 	@Test
-	@SkipForDialect(dialectClass = SQLServerDialect.class, reason = "SQLServer does not support setting explicit values for identity columns")
-	@SkipForDialect(dialectClass = OracleDialect.class, reason = "Oracle does not support setting explicit values for identity columns")
-	@SkipForDialect(dialectClass = SybaseASEDialect.class, reason = "Sybase does not support setting explicit values for identity columns")
+	@SkipForDialect( dialectClass = SQLServerDialect.class, reason = "SQLServer does not support setting explicit values for identity columns" )
+	@SkipForDialect( dialectClass = OracleDialect.class, reason = "Oracle does not support setting explicit values for identity columns" )
+	@SkipForDialect( dialectClass = SybaseASEDialect.class, reason = "Sybase does not support setting explicit values for identity columns" )
 	@SkipForDialect(dialectClass = GaussDBDialect.class, reason = "opengauss don't support")
 	public void testIdentityOrAssignedId(SessionFactoryScope scope) {
 		// on execution generation
@@ -81,9 +81,9 @@ public class MixedTimingGeneratorsTest {
 	}
 
 	@Test
-	@SkipForDialect(dialectClass = SQLServerDialect.class, reason = "SQLServer does not support setting explicit values for identity columns")
-	@SkipForDialect(dialectClass = OracleDialect.class, reason = "Oracle does not support setting explicit values for identity columns")
-	@SkipForDialect(dialectClass = SybaseASEDialect.class, reason = "Sybase does not support setting explicit values for identity columns")
+	@SkipForDialect( dialectClass = SQLServerDialect.class, reason = "SQLServer does not support setting explicit values for identity columns" )
+	@SkipForDialect( dialectClass = OracleDialect.class, reason = "Oracle does not support setting explicit values for identity columns" )
+	@SkipForDialect( dialectClass = SybaseASEDialect.class, reason = "Sybase does not support setting explicit values for identity columns" )
 	@SkipForDialect(dialectClass = GaussDBDialect.class, reason = "opengauss don't support")
 	public void testIdentityOrAssignedIdStateless(SessionFactoryScope scope) {
 		// on execution generation
@@ -101,9 +101,9 @@ public class MixedTimingGeneratorsTest {
 	}
 
 	@Test
-	@SkipForDialect(dialectClass = SQLServerDialect.class, reason = "SQLServer does not support setting explicit values for identity columns")
-	@SkipForDialect(dialectClass = OracleDialect.class, reason = "Oracle does not support setting explicit values for identity columns")
-	@SkipForDialect(dialectClass = SybaseASEDialect.class, reason = "Sybase does not support setting explicit values for identity columns")
+	@SkipForDialect( dialectClass = SQLServerDialect.class, reason = "SQLServer does not support setting explicit values for identity columns" )
+	@SkipForDialect( dialectClass = OracleDialect.class, reason = "Oracle does not support setting explicit values for identity columns" )
+	@SkipForDialect( dialectClass = SybaseASEDialect.class, reason = "Sybase does not support setting explicit values for identity columns" )
 	@SkipForDialect(dialectClass = GaussDBDialect.class, reason = "opengauss don't support")
 	public void testIdentityOrRandomId(SessionFactoryScope scope) {
 		// on execution generation
@@ -168,11 +168,11 @@ public class MixedTimingGeneratorsTest {
 		} );
 	}
 
-	@Entity(name = "AssignedEntity")
+	@Entity( name = "AssignedEntity" )
 	public static class AssignedEntity {
 		@Id
-		@GeneratedValue(generator = "identity_or_assigned")
-		@GenericGenerator(name = "identity_or_assigned", type = IdentityOrAssignedGenerator.class)
+		@GeneratedValue( generator = "identity_or_assigned" )
+		@GenericGenerator( name = "identity_or_assigned", type = IdentityOrAssignedGenerator.class )
 		private Long id;
 
 		private String name;
@@ -194,11 +194,11 @@ public class MixedTimingGeneratorsTest {
 		}
 	}
 
-	@Entity(name = "RandomEntity")
+	@Entity( name = "RandomEntity" )
 	public static class RandomEntity {
 		@Id
-		@GeneratedValue(generator = "identity_or_random")
-		@GenericGenerator(name = "identity_or_random", type = IdentityOrRandomGenerator.class)
+		@GeneratedValue( generator = "identity_or_random" )
+		@GenericGenerator( name = "identity_or_random", type = IdentityOrRandomGenerator.class )
 		private Long id;
 
 		private String name;
@@ -219,9 +219,9 @@ public class MixedTimingGeneratorsTest {
 		}
 	}
 
-	@ValueGenerationType(generatedBy = LiteralOrGeneratedStringGenerator.class)
-	@Retention(RUNTIME)
-	@Target({ FIELD, METHOD })
+	@ValueGenerationType( generatedBy = LiteralOrGeneratedStringGenerator.class )
+	@Retention( RUNTIME )
+	@Target( { FIELD, METHOD } )
 	public @interface GeneratedString {
 		/**
 		 * Specifies how the timestamp is generated. By default, it is generated
@@ -231,7 +231,7 @@ public class MixedTimingGeneratorsTest {
 	}
 
 
-	@Entity(name = "StringGeneratedEntity")
+	@Entity( name = "StringGeneratedEntity" )
 	public static class StringGeneratedEntity {
 		@Id
 		private Long id;

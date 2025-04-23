@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 @DomainModel
 @SessionFactory
 @ServiceRegistry(settings = @Setting(name = QuerySettings.XML_FUNCTIONS_ENABLED, value = "true"))
-@RequiresDialectFeature(feature = DialectFeatureChecks.SupportsXmlelement.class)
+@RequiresDialectFeature( feature = DialectFeatureChecks.SupportsXmlelement.class)
 public class XmlElementTest {
 
 	@Test
@@ -41,9 +41,7 @@ public class XmlElementTest {
 	public void testAttributesAndContent(SessionFactoryScope scope) {
 		scope.inSession( em -> {
 			//tag::hql-xmlelement-attributes-content-example[]
-			em.createQuery(
-							"select xmlelement(name `my-element`, xmlattributes(123 as attr1, '456' as `attr-2`), 'myContent', xmlelement(name empty))" )
-					.getResultList();
+			em.createQuery("select xmlelement(name `my-element`, xmlattributes(123 as attr1, '456' as `attr-2`), 'myContent', xmlelement(name empty))" ).getResultList();
 			//end::hql-xmlelement-attributes-content-example[]
 		} );
 	}

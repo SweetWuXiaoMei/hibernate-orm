@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 @DomainModel
 @SessionFactory
 @ServiceRegistry(settings = @Setting(name = QuerySettings.XML_FUNCTIONS_ENABLED, value = "true"))
-@RequiresDialectFeature(feature = DialectFeatureChecks.SupportsXmlpi.class)
+@RequiresDialectFeature( feature = DialectFeatureChecks.SupportsXmlpi.class)
 public class XmlPiTest {
 
 	@Test
@@ -41,7 +41,7 @@ public class XmlPiTest {
 	public void testContent(SessionFactoryScope scope) {
 		scope.inSession( em -> {
 			//tag::hql-xmlpi-content-example[]
-			em.createQuery( "select xmlpi(name `php`, 'echo \"test\"')" ).getResultList();
+			em.createQuery("select xmlpi(name `php`, 'echo \"test\"')" ).getResultList();
 			//end::hql-xmlpi-content-example[]
 		} );
 	}

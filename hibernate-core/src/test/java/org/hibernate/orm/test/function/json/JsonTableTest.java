@@ -4,20 +4,16 @@
  */
 package org.hibernate.orm.test.function.json;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.Tuple;
 import org.hibernate.cfg.QuerySettings;
-import org.hibernate.dialect.GaussDBDialect;
 import org.hibernate.query.criteria.JpaFunctionJoin;
 import org.hibernate.query.criteria.JpaJsonTableColumnsNode;
 import org.hibernate.query.criteria.JpaRoot;
 import org.hibernate.query.sqm.NodeBuilder;
 import org.hibernate.query.sqm.tree.expression.SqmJsonTableFunction;
 import org.hibernate.query.sqm.tree.select.SqmSelectStatement;
-
 import org.hibernate.testing.orm.junit.DialectFeatureChecks;
 import org.hibernate.testing.orm.junit.DomainModel;
 import org.hibernate.testing.orm.junit.RequiresDialectFeature;
@@ -26,13 +22,15 @@ import org.hibernate.testing.orm.junit.SessionFactory;
 import org.hibernate.testing.orm.junit.SessionFactoryScope;
 import org.hibernate.testing.orm.junit.Setting;
 import org.hibernate.testing.orm.junit.SkipForDialect;
+import org.hibernate.dialect.GaussDBDialect;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.Tuple;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -58,7 +56,7 @@ public class JsonTableTest {
 			entity.getJson().put( "theNull", null );
 			entity.getJson().put( "theArray", new String[] { "a", "b", "c" } );
 			entity.getJson().put( "theObject", new HashMap<>( entity.getJson() ) );
-			em.persist( entity );
+			em.persist(entity);
 		} );
 	}
 

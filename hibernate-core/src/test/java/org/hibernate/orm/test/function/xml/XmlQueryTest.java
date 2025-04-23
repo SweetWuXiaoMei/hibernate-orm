@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 @DomainModel
 @SessionFactory
 @ServiceRegistry(settings = @Setting(name = QuerySettings.XML_FUNCTIONS_ENABLED, value = "true"))
-@RequiresDialectFeature(feature = DialectFeatureChecks.SupportsXmlquery.class)
+@RequiresDialectFeature( feature = DialectFeatureChecks.SupportsXmlquery.class)
 public class XmlQueryTest {
 
 	@Test

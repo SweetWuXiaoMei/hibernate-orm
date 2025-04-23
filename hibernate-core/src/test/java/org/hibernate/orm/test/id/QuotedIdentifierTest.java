@@ -4,7 +4,13 @@
  */
 package org.hibernate.orm.test.id;
 
-import org.hibernate.dialect.GaussDBDialect;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import org.hibernate.dialect.OracleDialect;
 
 import org.hibernate.testing.orm.junit.DialectFeatureChecks.SupportsIdentityColumns;
@@ -13,14 +19,8 @@ import org.hibernate.testing.orm.junit.RequiresDialectFeature;
 import org.hibernate.testing.orm.junit.SessionFactory;
 import org.hibernate.testing.orm.junit.SessionFactoryScope;
 import org.hibernate.testing.orm.junit.SkipForDialect;
+import org.hibernate.dialect.GaussDBDialect;
 import org.junit.jupiter.api.Test;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

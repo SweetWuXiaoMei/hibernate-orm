@@ -18,11 +18,11 @@ import java.util.Map;
 /**
  * PostgreSQL json_query function.
  */
-public class GaussdbJsonExistsFunction extends JsonExistsFunction {
+public class GaussDBJsonExistsFunction extends JsonExistsFunction {
 
-	public GaussdbJsonExistsFunction(TypeConfiguration typeConfiguration,
-									boolean supportsJsonPathExpression,
-									boolean supportsJsonPathPassingClause) {
+	public GaussDBJsonExistsFunction(TypeConfiguration typeConfiguration,
+									 boolean supportsJsonPathExpression,
+									 boolean supportsJsonPathPassingClause) {
 		super(typeConfiguration, supportsJsonPathExpression, supportsJsonPathPassingClause);
 	}
 

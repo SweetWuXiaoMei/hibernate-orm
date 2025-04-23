@@ -43,14 +43,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @author Marco Belladelli
  */
-@RequiresDialectFeature(feature = DialectFeatureChecks.SupportsIdentityColumns.class)
-@DomainModel(annotatedClasses = {
+@RequiresDialectFeature( feature = DialectFeatureChecks.SupportsIdentityColumns.class )
+@DomainModel( annotatedClasses = {
 		MutationDelegateJoinedInheritanceTest.BaseEntity.class,
 		MutationDelegateJoinedInheritanceTest.ChildEntity.class,
 		MutationDelegateJoinedInheritanceTest.NonGeneratedParent.class,
 		MutationDelegateJoinedInheritanceTest.GeneratedChild.class,
-})
-@SessionFactory(useCollectingStatementInspector = true)
+} )
+@SessionFactory( useCollectingStatementInspector = true )
 @SkipForDialect(dialectClass = GaussDBDialect.class, reason = "opengauss don't support")
 public class MutationDelegateJoinedInheritanceTest {
 	@AfterAll
@@ -186,7 +186,7 @@ public class MutationDelegateJoinedInheritanceTest {
 	}
 
 	@Test
-	@Jira("https://hibernate.atlassian.net/browse/HHH-18259")
+	@Jira( "https://hibernate.atlassian.net/browse/HHH-18259" )
 	public void testGeneratedOnlyOnChild(SessionFactoryScope scope) {
 		final GeneratedValuesMutationDelegate delegate = getDelegate(
 				scope,
@@ -216,7 +216,7 @@ public class MutationDelegateJoinedInheritanceTest {
 
 	private static GeneratedValuesMutationDelegate getDelegate(
 			SessionFactoryScope scope,
-			@SuppressWarnings("SameParameterValue") Class<?> entityClass,
+			@SuppressWarnings( "SameParameterValue" ) Class<?> entityClass,
 			MutationType mutationType) {
 		final EntityPersister entityDescriptor = scope.getSessionFactory()
 				.getMappingMetamodel()
@@ -224,22 +224,22 @@ public class MutationDelegateJoinedInheritanceTest {
 		return entityDescriptor.getMutationDelegate( mutationType );
 	}
 
-	@Entity(name = "BaseEntity")
-	@Inheritance(strategy = InheritanceType.JOINED)
-	@SuppressWarnings("unused")
+	@Entity( name = "BaseEntity" )
+	@Inheritance( strategy = InheritanceType.JOINED )
+	@SuppressWarnings( "unused" )
 	public static class BaseEntity {
 		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		@GeneratedValue( strategy = GenerationType.IDENTITY )
 		private Long id;
 
-		@Generated(event = EventType.INSERT)
-		@ColumnDefault("'default_name'")
+		@Generated( event = EventType.INSERT )
+		@ColumnDefault( "'default_name'" )
 		private String name;
 
-		@UpdateTimestamp(source = SourceType.DB)
+		@UpdateTimestamp( source = SourceType.DB )
 		private Date updateDate;
 
-		@SuppressWarnings("FieldCanBeLocal")
+		@SuppressWarnings( "FieldCanBeLocal" )
 		private String data;
 
 		public Long getId() {
@@ -259,14 +259,14 @@ public class MutationDelegateJoinedInheritanceTest {
 		}
 	}
 
-	@Entity(name = "ChildEntity")
-	@SuppressWarnings("unused")
+	@Entity( name = "ChildEntity" )
+	@SuppressWarnings( "unused" )
 	public static class ChildEntity extends BaseEntity {
-		@Generated(event = EventType.INSERT)
-		@ColumnDefault("'default_child_name'")
+		@Generated( event = EventType.INSERT )
+		@ColumnDefault( "'default_child_name'" )
 		private String childName;
 
-		@UpdateTimestamp(source = SourceType.DB)
+		@UpdateTimestamp( source = SourceType.DB )
 		private Date childUpdateDate;
 
 		public String getChildName() {
@@ -278,9 +278,9 @@ public class MutationDelegateJoinedInheritanceTest {
 		}
 	}
 
-	@Entity(name = "NonGeneratedParent")
-	@Inheritance(strategy = InheritanceType.JOINED)
-	@SuppressWarnings("unused")
+	@Entity( name = "NonGeneratedParent" )
+	@Inheritance( strategy = InheritanceType.JOINED )
+	@SuppressWarnings( "unused" )
 	public static class NonGeneratedParent {
 		@Id
 		private Long id;
@@ -294,11 +294,11 @@ public class MutationDelegateJoinedInheritanceTest {
 		}
 	}
 
-	@Entity(name = "GeneratedChild")
-	@SuppressWarnings("unused")
+	@Entity( name = "GeneratedChild" )
+	@SuppressWarnings( "unused" )
 	public static class GeneratedChild extends NonGeneratedParent {
-		@Generated(event = EventType.INSERT)
-		@ColumnDefault("'child_name'")
+		@Generated( event = EventType.INSERT )
+		@ColumnDefault( "'child_name'" )
 		private String name;
 
 		public String getName() {

@@ -65,7 +65,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-@DomainModel(annotatedClasses = {
+@DomainModel( annotatedClasses = {
 		JsonFunctionTests.JsonHolder.class,
 		EntityOfBasics.class
 })
@@ -99,7 +99,7 @@ public class JsonFunctionTests {
 									Map.of( "id", 3, "name", "val3" )
 							)
 					);
-					em.persist( entity );
+					em.persist(entity);
 
 					EntityOfBasics e1 = new EntityOfBasics();
 					e1.setId( 1 );
@@ -212,10 +212,7 @@ public class JsonFunctionTests {
 									"[{\"id\":1,\"name\":\"val1\"},{\"id\":2,\"name\":\"val2\"},{\"id\":3,\"name\":\"val3\"}]" ),
 							parseJson( tuple.get( 1, String.class ) )
 					);
-					assertEquals(
-							parseJson( "[{\"id\":1,\"name\":\"val1\"}]" ),
-							parseJson( tuple.get( 2, String.class ) )
-					);
+					assertEquals( parseJson( "[{\"id\":1,\"name\":\"val1\"}]" ), parseJson( tuple.get( 2, String.class ) ) );
 				}
 		);
 	}
@@ -292,20 +289,14 @@ public class JsonFunctionTests {
 					).getSingleResult();
 					Map<String, Object> map = parseObject( json );
 					assertEquals( entity.json.get( "theInt" ).toString(), map.get( "theInt" ).toString() );
-					assertEquals(
-							entity.json.get( "theFloat" ),
-							Double.parseDouble( map.get( "theFloat" ).toString() )
-					);
+					assertEquals( entity.json.get( "theFloat" ), Double.parseDouble( map.get( "theFloat" ).toString() ) );
 					assertEquals( entity.json.get( "theString" ), map.get( "theString" ) );
 					assertEquals( entity.json.get( "theBoolean" ), map.get( "theBoolean" ) );
 					assertTrue( map.containsKey( "theNull" ) );
 					assertNull( map.get( "theNull" ) );
 					Map<String, Object> nested = (Map<String, Object>) map.get( "theObject" );
 					assertEquals( entity.json.get( "theInt" ).toString(), nested.get( "theInt" ).toString() );
-					assertEquals(
-							entity.json.get( "theFloat" ),
-							Double.parseDouble( nested.get( "theFloat" ).toString() )
-					);
+					assertEquals( entity.json.get( "theFloat" ), Double.parseDouble( nested.get( "theFloat" ).toString() ) );
 					assertEquals( entity.json.get( "theString" ), nested.get( "theString" ) );
 					assertEquals( entity.json.get( "theBoolean" ), nested.get( "theBoolean" ) );
 					// HSQLDB bug: https://sourceforge.net/p/hsqldb/bugs/1720/
@@ -333,7 +324,7 @@ public class JsonFunctionTests {
 							Tuple.class
 					).getSingleResult();
 					Map<String, Object> map = parseObject( tuple.get( 0 ).toString() );
-					assertEquals( List.of( 1, 2, 3 ), map.get( "a" ) );
+					assertEquals( List.of( 1,2,3 ), map.get( "a" ) );
 					assertInstanceOf( Map.class, map.get( "b" ) );
 					Map<String, Object> nested = (Map<String, Object>) map.get( "b" );
 					assertEquals( List.of( 4, 5, 6 ), nested.get( "c" ) );
@@ -405,7 +396,7 @@ public class JsonFunctionTests {
 							String.class
 					).getSingleResult();
 					Object[] array = parseArray( jsonArray );
-					assertArrayEquals( new Object[] { "Cat", "Dog" }, array );
+					assertArrayEquals( new Object[]{ "Cat", "Dog" }, array );
 				}
 		);
 	}
@@ -483,7 +474,7 @@ public class JsonFunctionTests {
 										"from EntityOfBasics e",
 								String.class
 						).getSingleResult();
-						fail( "Should fail because keys are not unique" );
+						fail("Should fail because keys are not unique");
 					}
 					catch (HibernateException e) {
 						assertInstanceOf( JDBCException.class, e );
@@ -861,7 +852,7 @@ public class JsonFunctionTests {
 			return binaryNode.binaryValue();
 		}
 		else {
-			throw new UnsupportedOperationException( "Unsupported node type: " + jsonNode.getClass().getName() );
+			throw new UnsupportedOperationException( "Unsupported node type: " +  jsonNode.getClass().getName() );
 		}
 	}
 

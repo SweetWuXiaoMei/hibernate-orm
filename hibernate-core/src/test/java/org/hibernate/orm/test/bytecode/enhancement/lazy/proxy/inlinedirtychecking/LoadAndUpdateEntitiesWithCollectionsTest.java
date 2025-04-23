@@ -6,11 +6,14 @@ package org.hibernate.orm.test.bytecode.enhancement.lazy.proxy.inlinedirtychecki
 
 import java.util.HashSet;
 import java.util.List;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 import org.hibernate.bytecode.internal.BytecodeProviderInitiator;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Environment;
-import org.hibernate.dialect.GaussDBDialect;
 import org.hibernate.engine.spi.SessionImplementor;
 
 import org.hibernate.testing.bytecode.enhancement.CustomEnhancementContext;
@@ -24,15 +27,11 @@ import org.hibernate.testing.orm.junit.SessionFactory;
 import org.hibernate.testing.orm.junit.SessionFactoryScope;
 import org.hibernate.testing.orm.junit.Setting;
 import org.hibernate.testing.orm.junit.SkipForDialect;
+import org.hibernate.dialect.GaussDBDialect;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -49,8 +48,8 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
 )
 @ServiceRegistry(
 		settings = {
-				@Setting(name = AvailableSettings.DEFAULT_BATCH_FETCH_SIZE, value = "100"),
-				@Setting(name = AvailableSettings.GENERATE_STATISTICS, value = "true"),
+				@Setting( name = AvailableSettings.DEFAULT_BATCH_FETCH_SIZE, value = "100" ),
+				@Setting( name = AvailableSettings.GENERATE_STATISTICS, value = "true" ),
 		}
 )
 @SessionFactory

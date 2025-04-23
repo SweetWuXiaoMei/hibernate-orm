@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 @DomainModel(annotatedClasses = EntityWithJson.class)
 @SessionFactory
 @ServiceRegistry(settings = @Setting(name = QuerySettings.JSON_FUNCTIONS_ENABLED, value = "true"))
-@RequiresDialectFeature(feature = DialectFeatureChecks.SupportsJsonValue.class)
+@RequiresDialectFeature( feature = DialectFeatureChecks.SupportsJsonValue.class)
 public class JsonValueTest {
 
 	@BeforeEach
@@ -52,7 +52,7 @@ public class JsonValueTest {
 			entity.getJson().put( "theNull", null );
 			entity.getJson().put( "theArray", new String[] { "a", "b", "c" } );
 			entity.getJson().put( "theObject", new HashMap<>( entity.getJson() ) );
-			em.persist( entity );
+			em.persist(entity);
 		} );
 	}
 
@@ -68,10 +68,7 @@ public class JsonValueTest {
 	public void testSimple(SessionFactoryScope scope) {
 		scope.inSession( em -> {
 			//tag::hql-json-value-example[]
-			List<Tuple> results = em.createQuery(
-							"select json_value(e.json, '$.theString') from EntityWithJson e",
-							Tuple.class
-					)
+			List<Tuple> results = em.createQuery( "select json_value(e.json, '$.theString') from EntityWithJson e", Tuple.class )
 					.getResultList();
 			//end::hql-json-value-example[]
 			assertEquals( 1, results.size() );
@@ -83,10 +80,7 @@ public class JsonValueTest {
 	public void testPassing(SessionFactoryScope scope) {
 		scope.inSession( em -> {
 			//tag::hql-json-value-passing-example[]
-			List<Tuple> results = em.createQuery(
-							"select json_value(e.json, '$.theArray[$idx]' passing 1 as idx) from EntityWithJson e",
-							Tuple.class
-					)
+			List<Tuple> results = em.createQuery( "select json_value(e.json, '$.theArray[$idx]' passing 1 as idx) from EntityWithJson e", Tuple.class )
 					.getResultList();
 			//end::hql-json-value-passing-example[]
 			assertEquals( 1, results.size() );
@@ -98,10 +92,7 @@ public class JsonValueTest {
 	public void testReturning(SessionFactoryScope scope) {
 		scope.inSession( em -> {
 			//tag::hql-json-value-returning-example[]
-			List<Tuple> results = em.createQuery(
-							"select json_value(e.json, '$.theInt' returning Integer) from EntityWithJson e",
-							Tuple.class
-					)
+			List<Tuple> results = em.createQuery( "select json_value(e.json, '$.theInt' returning Integer) from EntityWithJson e", Tuple.class )
 					.getResultList();
 			//end::hql-json-value-returning-example[]
 			assertEquals( 1, results.size() );
@@ -114,12 +105,12 @@ public class JsonValueTest {
 		scope.inSession( em -> {
 			try {
 				//tag::hql-json-value-on-error-example[]
-				em.createQuery( "select json_value('invalidJson', '$.theInt' error on error) from EntityWithJson e" )
+				em.createQuery( "select json_value('invalidJson', '$.theInt' error on error) from EntityWithJson e")
 						.getResultList();
 				//end::hql-json-value-on-error-example[]
-				fail( "error clause should fail because of invalid json document" );
+				fail("error clause should fail because of invalid json document");
 			}
-			catch (HibernateException e) {
+			catch ( HibernateException e ) {
 				if ( !( e instanceof JDBCException ) && !( e instanceof ExecutionException ) ) {
 					throw e;
 				}
@@ -128,19 +119,18 @@ public class JsonValueTest {
 	}
 
 	@Test
-	@RequiresDialectFeature(feature = DialectFeatureChecks.SupportsJsonValueErrorBehavior.class)
+	@RequiresDialectFeature( feature = DialectFeatureChecks.SupportsJsonValueErrorBehavior.class)
 	@SkipForDialect(dialectClass = GaussDBDialect.class, reason = "opengauss don't support")
 	public void testOnEmpty(SessionFactoryScope scope) {
 		scope.inSession( em -> {
 			try {
 				//tag::hql-json-value-on-empty-example[]
-				em.createQuery(
-								"select json_value(e.json, '$.nonExisting' error on empty error on error) from EntityWithJson e" )
+				em.createQuery("select json_value(e.json, '$.nonExisting' error on empty error on error) from EntityWithJson e" )
 						.getResultList();
 				//end::hql-json-value-on-empty-example[]
-				fail( "empty clause should fail because of json path doesn't produce results" );
+				fail("empty clause should fail because of json path doesn't produce results");
 			}
-			catch (HibernateException e) {
+			catch ( HibernateException e ) {
 				if ( !( e instanceof JDBCException ) && !( e instanceof ExecutionException ) ) {
 					throw e;
 				}

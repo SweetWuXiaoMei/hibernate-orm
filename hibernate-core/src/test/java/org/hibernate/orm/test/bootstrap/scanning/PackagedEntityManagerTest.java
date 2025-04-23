@@ -68,10 +68,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 @SkipForDialect(dialectClass = GaussDBDialect.class, reason = "opengauss don't support")
 public class PackagedEntityManagerTest extends PackagingTestCase {
 	private EntityManagerFactory emf;
-
 	@AfterEach
-	public void tearDown() {
-		if ( emf != null && emf.isOpen() ) {
+	public void tearDown(){
+		if(emf != null && emf.isOpen()) {
 			emf.close();
 		}
 	}
@@ -83,31 +82,29 @@ public class PackagedEntityManagerTest extends PackagingTestCase {
 
 		// run the test
 		emf = Persistence.createEntityManagerFactory( "defaultpar", ServiceRegistryUtil.createBaseSettings() );
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					ApplicationServer as = new ApplicationServer();
-					as.setName( "JBoss AS" );
-					Version v = new Version();
-					v.setMajor( 4 );
-					v.setMinor( 0 );
-					v.setMicro( 3 );
-					as.setVersion( v );
-					Mouse mouse = new Mouse();
-					mouse.setName( "mickey" );
-					em.persist( as );
-					em.persist( mouse );
-					assertEquals( 1, em.createNamedQuery( "allMouse" ).getResultList().size() );
-					Lighter lighter = new Lighter();
-					lighter.name = "main";
-					lighter.power = " 250 W";
-					em.persist( lighter );
-					em.flush();
-					em.remove( lighter );
-					em.remove( mouse );
-					assertNotNull( as.getId() );
-					em.remove( as );
-				}
-		);
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			ApplicationServer as = new ApplicationServer();
+			as.setName( "JBoss AS" );
+			Version v = new Version();
+			v.setMajor( 4 );
+			v.setMinor( 0 );
+			v.setMicro( 3 );
+			as.setVersion( v );
+			Mouse mouse = new Mouse();
+			mouse.setName( "mickey" );
+			em.persist( as );
+			em.persist( mouse );
+			assertEquals( 1, em.createNamedQuery( "allMouse" ).getResultList().size() );
+			Lighter lighter = new Lighter();
+			lighter.name = "main";
+			lighter.power = " 250 W";
+			em.persist( lighter );
+			em.flush();
+			em.remove( lighter );
+			em.remove( mouse );
+			assertNotNull( as.getId() );
+			em.remove( as );
+		} );
 	}
 
 	@Test
@@ -116,31 +113,29 @@ public class PackagedEntityManagerTest extends PackagingTestCase {
 		addPackageToClasspath( testPackage );
 
 		emf = Persistence.createEntityManagerFactory( "defaultpar_1_0", ServiceRegistryUtil.createBaseSettings() );
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					ApplicationServer1 as = new ApplicationServer1();
-					as.setName( "JBoss AS" );
-					Version1 v = new Version1();
-					v.setMajor( 4 );
-					v.setMinor( 0 );
-					v.setMicro( 3 );
-					as.setVersion( v );
-					Mouse1 mouse = new Mouse1();
-					mouse.setName( "mickey" );
-					em.persist( as );
-					em.persist( mouse );
-					assertEquals( 1, em.createNamedQuery( "allMouse_1_0" ).getResultList().size() );
-					Lighter1 lighter = new Lighter1();
-					lighter.name = "main";
-					lighter.power = " 250 W";
-					em.persist( lighter );
-					em.flush();
-					em.remove( lighter );
-					em.remove( mouse );
-					assertNotNull( as.getId() );
-					em.remove( as );
-				}
-		);
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			ApplicationServer1 as = new ApplicationServer1();
+			as.setName( "JBoss AS" );
+			Version1 v = new Version1();
+			v.setMajor( 4 );
+			v.setMinor( 0 );
+			v.setMicro( 3 );
+			as.setVersion( v );
+			Mouse1 mouse = new Mouse1();
+			mouse.setName( "mickey" );
+			em.persist( as );
+			em.persist( mouse );
+			assertEquals( 1, em.createNamedQuery( "allMouse_1_0" ).getResultList().size() );
+			Lighter1 lighter = new Lighter1();
+			lighter.name = "main";
+			lighter.power = " 250 W";
+			em.persist( lighter );
+			em.flush();
+			em.remove( lighter );
+			em.remove( mouse );
+			assertNotNull( as.getId() );
+			em.remove( as );
+		} );
 	}
 
 	@Test
@@ -151,35 +146,33 @@ public class PackagedEntityManagerTest extends PackagingTestCase {
 		IncrementListener.reset();
 		OtherIncrementListener.reset();
 		emf = Persistence.createEntityManagerFactory( "defaultpar", ServiceRegistryUtil.createBaseSettings() );
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					ApplicationServer as = new ApplicationServer();
-					as.setName( "JBoss AS" );
-					Version v = new Version();
-					v.setMajor( 4 );
-					v.setMinor( 0 );
-					v.setMicro( 3 );
-					as.setVersion( v );
-					em.persist( as );
-					em.flush();
-					assertEquals( 1, IncrementListener.getIncrement(), "Failure in default listeners" );
-					assertEquals( 1, OtherIncrementListener.getIncrement(), "Failure in XML overridden listeners" );
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			ApplicationServer as = new ApplicationServer();
+			as.setName( "JBoss AS" );
+			Version v = new Version();
+			v.setMajor( 4 );
+			v.setMinor( 0 );
+			v.setMicro( 3 );
+			as.setVersion( v );
+			em.persist( as );
+			em.flush();
+			assertEquals( 1, IncrementListener.getIncrement(), "Failure in default listeners" );
+			assertEquals( 1, OtherIncrementListener.getIncrement(), "Failure in XML overridden listeners" );
 
-					Mouse mouse = new Mouse();
-					mouse.setName( "mickey" );
-					em.persist( mouse );
-					em.flush();
-					assertEquals( 1, IncrementListener.getIncrement(), "Failure in @ExcludeDefaultListeners" );
-					assertEquals( 1, OtherIncrementListener.getIncrement() );
+			Mouse mouse = new Mouse();
+			mouse.setName( "mickey" );
+			em.persist( mouse );
+			em.flush();
+			assertEquals( 1, IncrementListener.getIncrement(), "Failure in @ExcludeDefaultListeners" );
+			assertEquals( 1, OtherIncrementListener.getIncrement() );
 
-					Money money = new Money();
-					em.persist( money );
-					em.flush();
-					assertEquals( 2, IncrementListener.getIncrement(), "Failure in @ExcludeDefaultListeners" );
-					assertEquals( 1, OtherIncrementListener.getIncrement() );
-					em.getTransaction().setRollbackOnly();
-				}
-		);
+			Money money = new Money();
+			em.persist( money );
+			em.flush();
+			assertEquals( 2, IncrementListener.getIncrement(), "Failure in @ExcludeDefaultListeners" );
+			assertEquals( 1, OtherIncrementListener.getIncrement() );
+			em.getTransaction().setRollbackOnly();
+		} );
 	}
 
 	@Test
@@ -188,19 +181,17 @@ public class PackagedEntityManagerTest extends PackagingTestCase {
 		addPackageToClasspath( testPackage );
 
 		emf = Persistence.createEntityManagerFactory( "explodedpar", ServiceRegistryUtil.createBaseSettings() );
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					Carpet carpet = new Carpet();
-					Elephant el = new Elephant();
-					el.setName( "Dumbo" );
-					carpet.setCountry( "Turkey" );
-					em.persist( carpet );
-					em.persist( el );
-					assertEquals( 1, em.createNamedQuery( "allCarpet" ).getResultList().size() );
-					assertNotNull( carpet.getId() );
-					em.remove( carpet );
-				}
-		);
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			Carpet carpet = new Carpet();
+			Elephant el = new Elephant();
+			el.setName( "Dumbo" );
+			carpet.setCountry( "Turkey" );
+			em.persist( carpet );
+			em.persist( el );
+			assertEquals( 1, em.createNamedQuery( "allCarpet" ).getResultList().size() );
+			assertNotNull( carpet.getId() );
+			em.remove( carpet );
+		} );
 	}
 
 	@Test
@@ -211,7 +202,7 @@ public class PackagedEntityManagerTest extends PackagingTestCase {
 		try {
 			emf = Persistence.createEntityManagerFactory( "excludehbmpar", ServiceRegistryUtil.createBaseSettings() );
 		}
-		catch (PersistenceException e) {
+		catch ( PersistenceException e ) {
 			if ( emf != null ) {
 				emf.close();
 			}
@@ -229,17 +220,15 @@ public class PackagedEntityManagerTest extends PackagingTestCase {
 			fail( "Try to process hbm file: " + e.getMessage() );
 
 		}
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					Caipirinha s = new Caipirinha( "Strong" );
-					em.persist( s );
-					em.getTransaction().commit();
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			Caipirinha s = new Caipirinha( "Strong" );
+			em.persist( s );
+			em.getTransaction().commit();
 
-					em.getTransaction().begin();
-					s = em.find( Caipirinha.class, s.getId() );
-					em.remove( s );
-				}
-		);
+			em.getTransaction().begin();
+			s = em.find( Caipirinha.class, s.getId() );
+			em.remove( s );
+		} );
 	}
 
 	@Test
@@ -251,23 +240,21 @@ public class PackagedEntityManagerTest extends PackagingTestCase {
 
 		assertTrue( emf.getProperties().containsKey( "hibernate.test-assertable-setting" ) );
 
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					Item i = new Item();
-					i.setDescr( "Blah" );
-					i.setName( "factory" );
-					Morito m = new Morito();
-					m.setPower( "SuperStrong" );
-					em.persist( i );
-					em.persist( m );
-					em.getTransaction().commit();
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			Item i = new Item();
+			i.setDescr( "Blah" );
+			i.setName( "factory" );
+			Morito m = new Morito();
+			m.setPower( "SuperStrong" );
+			em.persist( i );
+			em.persist( m );
+			em.getTransaction().commit();
 
-					em.getTransaction().begin();
-					i = em.find( Item.class, i.getName() );
-					em.remove( i );
-					em.remove( em.find( Morito.class, m.getId() ) );
-				}
-		);
+			em.getTransaction().begin();
+			i = em.find( Item.class, i.getName() );
+			em.remove( i );
+			em.remove( em.find( Morito.class, m.getId() ) );
+		} );
 	}
 
 	@Test
@@ -276,17 +263,15 @@ public class PackagedEntityManagerTest extends PackagingTestCase {
 		addPackageToClasspath( testPackage );
 
 		emf = Persistence.createEntityManagerFactory( "space par", ServiceRegistryUtil.createBaseSettings() );
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					org.hibernate.orm.test.jpa.pack.spacepar.Bug bug = new org.hibernate.orm.test.jpa.pack.spacepar.Bug();
-					bug.setSubject( "Spaces in directory name don't play well on Windows" );
-					em.persist( bug );
-					em.flush();
-					em.remove( bug );
-					assertNotNull( bug.getId() );
-					em.getTransaction().setRollbackOnly();
-				}
-		);
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			org.hibernate.orm.test.jpa.pack.spacepar.Bug bug = new org.hibernate.orm.test.jpa.pack.spacepar.Bug();
+			bug.setSubject( "Spaces in directory name don't play well on Windows" );
+			em.persist( bug );
+			em.flush();
+			em.remove( bug );
+			assertNotNull( bug.getId() );
+			em.getTransaction().setRollbackOnly();
+		} );
 	}
 
 	@Test
@@ -301,17 +286,15 @@ public class PackagedEntityManagerTest extends PackagingTestCase {
 		//noinspection rawtypes
 		properties.putAll( (Map) p );
 		emf = Persistence.createEntityManagerFactory( "overridenpar", properties );
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					org.hibernate.orm.test.jpa.pack.overridenpar.Bug bug = new org.hibernate.orm.test.jpa.pack.overridenpar.Bug();
-					bug.setSubject( "Allow DS overriding" );
-					em.persist( bug );
-					em.flush();
-					em.remove( bug );
-					assertNotNull( bug.getId() );
-					em.getTransaction().setRollbackOnly();
-				}
-		);
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			org.hibernate.orm.test.jpa.pack.overridenpar.Bug bug = new org.hibernate.orm.test.jpa.pack.overridenpar.Bug();
+			bug.setSubject( "Allow DS overriding" );
+			em.persist( bug );
+			em.flush();
+			em.remove( bug );
+			assertNotNull( bug.getId() );
+			em.getTransaction().setRollbackOnly();
+		} );
 	}
 
 	@Test
@@ -341,47 +324,44 @@ public class PackagedEntityManagerTest extends PackagingTestCase {
 		addPackageToClasspath( testPackage );
 
 		emf = Persistence.createEntityManagerFactory( "manager1", ServiceRegistryUtil.createBaseSettings() );
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					Item item = new Item( "Mouse", "Micro$oft mouse" );
-					em.persist( item );
-					assertTrue( em.contains( item ) );
-					em.getTransaction().commit();
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			Item item = new Item( "Mouse", "Micro$oft mouse" );
+			em.persist( item );
+			assertTrue( em.contains( item ) );
+			em.getTransaction().commit();
 
-					assertTrue( em.contains( item ) );
+			assertTrue( em.contains( item ) );
 
-					em.getTransaction().begin();
-					Item item1 = (Item) em.createQuery( "select i from Item i where descr like 'M%'" )
-							.getSingleResult();
-					assertNotNull( item1 );
-					assertSame( item, item1 );
-					item.setDescr( "Micro$oft wireless mouse" );
-					assertTrue( em.contains( item ) );
-					em.getTransaction().commit();
+			em.getTransaction().begin();
+			Item item1 = (Item) em.createQuery( "select i from Item i where descr like 'M%'" ).getSingleResult();
+			assertNotNull( item1 );
+			assertSame( item, item1 );
+			item.setDescr( "Micro$oft wireless mouse" );
+			assertTrue( em.contains( item ) );
+			em.getTransaction().commit();
 
-					assertTrue( em.contains( item ) );
+			assertTrue( em.contains( item ) );
 
-					em.getTransaction().begin();
-					item1 = em.find( Item.class, "Mouse" );
-					assertSame( item, item1 );
-					em.getTransaction().commit();
-					assertTrue( em.contains( item ) );
+			em.getTransaction().begin();
+			item1 = em.find( Item.class, "Mouse" );
+			assertSame( item, item1 );
+			em.getTransaction().commit();
+			assertTrue( em.contains( item ) );
 
-					item1 = em.find( Item.class, "Mouse" );
-					assertSame( item, item1 );
-					assertTrue( em.contains( item ) );
+			item1 = em.find( Item.class, "Mouse" );
+			assertSame( item, item1 );
+			assertTrue( em.contains( item ) );
 
-					item1 = (Item) em.createQuery( "select i from Item i where descr like 'M%'" ).getSingleResult();
-					assertNotNull( item1 );
-					assertSame( item, item1 );
-					assertTrue( em.contains( item ) );
+			item1 = (Item) em.createQuery( "select i from Item i where descr like 'M%'" ).getSingleResult();
+			assertNotNull( item1 );
+			assertSame( item, item1 );
+			assertTrue( em.contains( item ) );
 
-					em.getTransaction().begin();
-					assertTrue( em.contains( item ) );
-					em.remove( item );
-					em.remove( item ); //second remove should be a no-op
-				}
-		);
+			em.getTransaction().begin();
+			assertTrue( em.contains( item ) );
+			em.remove( item );
+			em.remove( item ); //second remove should be a no-op
+		} );
 	}
 
 	@Test
@@ -399,36 +379,30 @@ public class PackagedEntityManagerTest extends PackagingTestCase {
 		stats.clear();
 		stats.setStatisticsEnabled( true );
 
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					em.persist( res );
-					em.persist( item );
-					assertTrue( em.contains( item ) );
-				}
-		);
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			em.persist( res );
+			em.persist( item );
+			assertTrue( em.contains( item ) );
+		} );
 
 		assertEquals( 1, stats.getSecondLevelCachePutCount() );
 		assertEquals( 0, stats.getSecondLevelCacheHitCount() );
 
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					Item second = em.find( Item.class, item.getName() );
-					assertEquals( 1, second.getDistributors().size() );
-					assertEquals( 1, stats.getSecondLevelCacheHitCount() );
-				}
-		);
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			Item second = em.find( Item.class, item.getName() );
+			assertEquals( 1, second.getDistributors().size() );
+			assertEquals( 1, stats.getSecondLevelCacheHitCount() );
+		} );
 
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					Item second = em.find( Item.class, item.getName() );
-					assertEquals( 1, second.getDistributors().size() );
-					assertEquals( 3, stats.getSecondLevelCacheHitCount() );
-					for ( Distributor distro : second.getDistributors() ) {
-						em.remove( distro );
-					}
-					em.remove( second );
-				}
-		);
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			Item second = em.find( Item.class, item.getName() );
+			assertEquals( 1, second.getDistributors().size() );
+			assertEquals( 3, stats.getSecondLevelCacheHitCount() );
+			for ( Distributor distro : second.getDistributors() ) {
+				em.remove( distro );
+			}
+			em.remove( second );
+		} );
 
 		stats.clear();
 		stats.setStatisticsEnabled( false );
@@ -441,22 +415,18 @@ public class PackagedEntityManagerTest extends PackagingTestCase {
 		addPackageToClasspath( testPackage, externalJar );
 
 		emf = Persistence.createEntityManagerFactory( "manager1", ServiceRegistryUtil.createBaseSettings() );
-		Scooter scooter = TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					Scooter s = new Scooter();
-					s.setModel( "Abadah" );
-					s.setSpeed( 85l );
-					em.persist( s );
-					return s;
-				}
-		);
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					Scooter s = em.find( Scooter.class, scooter.getModel() );
-					assertEquals( Long.valueOf( 85 ), s.getSpeed() );
-					em.remove( s );
-				}
-		);
+		Scooter scooter = TransactionUtil.doInJPA( () -> emf, em -> {
+			Scooter s = new Scooter();
+			s.setModel( "Abadah" );
+			s.setSpeed( 85l );
+			em.persist( s );
+			return s;
+		} );
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			Scooter s = em.find( Scooter.class, scooter.getModel() );
+			assertEquals( Long.valueOf( 85 ), s.getSpeed() );
+			em.remove( s );
+		} );
 	}
 
 	@Test
@@ -473,22 +443,18 @@ public class PackagedEntityManagerTest extends PackagingTestCase {
 		emf.getMetamodel().entity( Scooter.class );
 
 		// additionally, try to use them
-		Scooter scooter = TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					Scooter s = new Scooter();
-					s.setModel( "Abadah" );
-					s.setSpeed( 85l );
-					em.persist( s );
-					return s;
-				}
-		);
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					Scooter s = em.find( Scooter.class, scooter.getModel() );
-					assertEquals( Long.valueOf( 85 ), s.getSpeed() );
-					em.remove( s );
-				}
-		);
+		Scooter scooter = TransactionUtil.doInJPA( () -> emf, em -> {
+			Scooter s = new Scooter();
+			s.setModel( "Abadah" );
+			s.setSpeed( 85l );
+			em.persist( s );
+			return s;
+		} );
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			Scooter s = em.find( Scooter.class, scooter.getModel() );
+			assertEquals( Long.valueOf( 85 ), s.getSpeed() );
+			em.remove( s );
+		} );
 	}
 
 	@Test
@@ -497,17 +463,15 @@ public class PackagedEntityManagerTest extends PackagingTestCase {
 		addPackageToClasspath( testPackage );
 
 		emf = Persistence.createEntityManagerFactory( "manager1", ServiceRegistryUtil.createBaseSettings() );
-		TransactionUtil.doInJPA(
-				() -> emf, em -> {
-					Seat seat = new Seat();
-					seat.setNumber( "3B" );
-					Airplane plane = new Airplane();
-					plane.setSerialNumber( "75924418409052355" );
-					em.persist( seat );
-					em.persist( plane );
-					em.flush();
-					em.getTransaction().setRollbackOnly();
-				}
-		);
+		TransactionUtil.doInJPA( () -> emf, em -> {
+			Seat seat = new Seat();
+			seat.setNumber( "3B" );
+			Airplane plane = new Airplane();
+			plane.setSerialNumber( "75924418409052355" );
+			em.persist( seat );
+			em.persist( plane );
+			em.flush();
+			em.getTransaction().setRollbackOnly();
+		});
 	}
 }

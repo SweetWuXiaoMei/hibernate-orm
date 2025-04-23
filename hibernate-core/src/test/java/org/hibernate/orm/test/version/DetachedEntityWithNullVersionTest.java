@@ -58,16 +58,15 @@ public class DetachedEntityWithNullVersionTest {
 		// for generated id Hibernate can detect that the instance is not transient
 		// so because of the discrepancy of the null version
 		// that implies a transient instance an exception should be thrown
-		Assertions.assertThrows(
-				PropertyValueException.class, () ->
-						scope.inTransaction(
-								session -> {
-									IdentityGeneratedIdItem item1 = new IdentityGeneratedIdItem();
-									item1.id = item.getId();
-									item1.setName( ITEM_UPDATED_NAME );
-									session.merge( item1 );
-								}
-						)
+		Assertions.assertThrows( PropertyValueException.class, () ->
+				scope.inTransaction(
+						session -> {
+							IdentityGeneratedIdItem item1 = new IdentityGeneratedIdItem();
+							item1.id = item.getId();
+							item1.setName( ITEM_UPDATED_NAME );
+							session.merge( item1 );
+						}
+				)
 		);
 
 		assertItemHasNotBeenUpdated( item, scope );
@@ -86,16 +85,15 @@ public class DetachedEntityWithNullVersionTest {
 		// for generated id Hibernate can detect that the instance is not transient
 		// so because of the discrepancy of the null version
 		// that implies a transient instance an exception should be thrown
-		Assertions.assertThrows(
-				PropertyValueException.class, () ->
-						scope.inTransaction(
-								session -> {
-									SequenceGeneratedIdItem item1 = new SequenceGeneratedIdItem();
-									item1.id = item.getId();
-									item1.setName( ITEM_UPDATED_NAME );
-									session.merge( item1 );
-								}
-						)
+		Assertions.assertThrows( PropertyValueException.class, () ->
+				scope.inTransaction(
+						session -> {
+							SequenceGeneratedIdItem item1 = new SequenceGeneratedIdItem();
+							item1.id = item.getId();
+							item1.setName( ITEM_UPDATED_NAME );
+							session.merge( item1 );
+						}
+				)
 		);
 
 		assertItemHasNotBeenUpdated( item, scope );
@@ -114,16 +112,15 @@ public class DetachedEntityWithNullVersionTest {
 		// for generated id Hibernate can detect that the instance is not transient
 		// so because of the discrepancy of the null version
 		// that implies a transient instance an exception should be thrown
-		Assertions.assertThrows(
-				PropertyValueException.class, () ->
-						scope.inTransaction(
-								session -> {
-									TableGeneratedIdItem item1 = new TableGeneratedIdItem();
-									item1.id = item.getId();
-									item1.setName( ITEM_UPDATED_NAME );
-									session.merge( item1 );
-								}
-						)
+		Assertions.assertThrows( PropertyValueException.class, () ->
+				scope.inTransaction(
+						session -> {
+							TableGeneratedIdItem item1 = new TableGeneratedIdItem();
+							item1.id = item.getId();
+							item1.setName( ITEM_UPDATED_NAME );
+							session.merge( item1 );
+						}
+				)
 		);
 
 		assertItemHasNotBeenUpdated( item, scope );
@@ -142,16 +139,15 @@ public class DetachedEntityWithNullVersionTest {
 		// for generated id Hibernate can detect that the instance is not transient
 		// so because of the discrepancy of the null version
 		// that implies a transient instance an exception should be thrownAssertions.assertThrows( HibernateException.class, () ->
-		Assertions.assertThrows(
-				PropertyValueException.class, () ->
-						scope.inTransaction(
-								session -> {
-									UUIDIdItem item1 = new UUIDIdItem();
-									item1.id = item.getId();
-									item1.setName( ITEM_UPDATED_NAME );
-									session.merge( item1 );
-								}
-						)
+		Assertions.assertThrows( PropertyValueException.class, () ->
+				scope.inTransaction(
+						session -> {
+							UUIDIdItem item1 = new UUIDIdItem();
+							item1.id = item.getId();
+							item1.setName( ITEM_UPDATED_NAME );
+							session.merge( item1 );
+						}
+				)
 		);
 
 		assertItemHasNotBeenUpdated( item, scope );
@@ -170,14 +166,13 @@ public class DetachedEntityWithNullVersionTest {
 		// Hibernate for assigned id does not detect that this is a detached instance so consider it
 		// a transient instance because of the null version
 		// so a constraint exception is thrown when Hibernate tries to persist it
-		Assertions.assertThrows(
-				ConstraintViolationException.class, () ->
-						scope.inTransaction(
-								session -> {
-									AssignedIdItem item1 = new AssignedIdItem( 1l, ITEM_UPDATED_NAME );
-									session.merge( item1 );
-								}
-						)
+		Assertions.assertThrows( ConstraintViolationException.class, () ->
+				scope.inTransaction(
+						session -> {
+							AssignedIdItem item1 = new AssignedIdItem( 1l, ITEM_UPDATED_NAME );
+							session.merge( item1 );
+						}
+				)
 		);
 
 		assertItemHasNotBeenUpdated( item, scope );

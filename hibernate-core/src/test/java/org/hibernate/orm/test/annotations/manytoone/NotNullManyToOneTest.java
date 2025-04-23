@@ -4,15 +4,15 @@
  */
 package org.hibernate.orm.test.annotations.manytoone;
 
+import org.hibernate.dialect.GaussDBDialect;
 import org.hibernate.boot.beanvalidation.ValidationMode;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.dialect.GaussDBDialect;
 
 import org.hibernate.testing.DialectChecks;
 import org.hibernate.testing.RequiresDialectFeature;
-import org.hibernate.testing.junit4.BaseCoreFunctionalTestCase;
 import org.hibernate.testing.orm.junit.JiraKey;
+import org.hibernate.testing.junit4.BaseCoreFunctionalTestCase;
 import org.hibernate.testing.orm.junit.SkipForDialect;
 import org.junit.Test;
 

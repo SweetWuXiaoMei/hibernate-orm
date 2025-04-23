@@ -15,18 +15,18 @@ import org.hibernate.dialect.GaussDBDialect;
 
 import org.hibernate.testing.DialectChecks;
 import org.hibernate.testing.RequiresDialectFeature;
-import org.hibernate.testing.junit4.BaseCoreFunctionalTestCase;
 import org.hibernate.testing.orm.junit.JiraKey;
+import org.hibernate.testing.junit4.BaseCoreFunctionalTestCase;
 import org.hibernate.testing.orm.junit.JiraKeyGroup;
 import org.hibernate.testing.orm.junit.SkipForDialect;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@JiraKeyGroup(value = {
-		@JiraKey(value = "HHH-14530"),
-		@JiraKey(value = "HHH-14529")
-})
+@JiraKeyGroup( value = {
+		@JiraKey( value = "HHH-14530" ),
+		@JiraKey( value = "HHH-14529" )
+} )
 @RequiresDialectFeature(DialectChecks.SupportsIdentityColumns.class)
 public class PreParsedOrmXmlTest extends BaseCoreFunctionalTestCase {
 

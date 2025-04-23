@@ -9,8 +9,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.dialect.GaussDBDialect;
-
 import org.hibernate.testing.bytecode.enhancement.extension.BytecodeEnhanced;
 import org.hibernate.testing.orm.junit.DialectFeatureChecks;
 import org.hibernate.testing.orm.junit.DomainModel;
@@ -19,7 +17,7 @@ import org.hibernate.testing.orm.junit.RequiresDialectFeature;
 import org.hibernate.testing.orm.junit.SessionFactory;
 import org.hibernate.testing.orm.junit.SessionFactoryScope;
 import org.hibernate.testing.orm.junit.SkipForDialect;
-import org.junit.jupiter.api.Test;
+import org.hibernate.dialect.GaussDBDialect;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
@@ -37,6 +35,8 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Christian Beikov

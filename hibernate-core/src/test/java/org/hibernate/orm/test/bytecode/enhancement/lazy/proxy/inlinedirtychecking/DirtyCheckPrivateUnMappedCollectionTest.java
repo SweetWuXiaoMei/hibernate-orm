@@ -4,14 +4,23 @@
  */
 package org.hibernate.orm.test.bytecode.enhancement.lazy.proxy.inlinedirtychecking;
 
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Converter;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 
 import org.hibernate.bytecode.internal.BytecodeProviderInitiator;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Environment;
-import org.hibernate.dialect.GaussDBDialect;
 
 import org.hibernate.testing.bytecode.enhancement.CustomEnhancementContext;
 import org.hibernate.testing.bytecode.enhancement.extension.BytecodeEnhanced;
@@ -23,19 +32,9 @@ import org.hibernate.testing.orm.junit.SessionFactory;
 import org.hibernate.testing.orm.junit.SessionFactoryScope;
 import org.hibernate.testing.orm.junit.Setting;
 import org.hibernate.testing.orm.junit.SkipForDialect;
+import org.hibernate.dialect.GaussDBDialect;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import jakarta.persistence.AttributeConverter;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Converter;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
-
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 /**
  * @author Andrea Boriero
@@ -47,8 +46,8 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
 )
 @ServiceRegistry(
 		settings = {
-				@Setting(name = AvailableSettings.DEFAULT_BATCH_FETCH_SIZE, value = "100"),
-				@Setting(name = AvailableSettings.GENERATE_STATISTICS, value = "true"),
+				@Setting( name = AvailableSettings.DEFAULT_BATCH_FETCH_SIZE, value = "100" ),
+				@Setting( name = AvailableSettings.GENERATE_STATISTICS, value = "true" ),
 		}
 )
 @SessionFactory
