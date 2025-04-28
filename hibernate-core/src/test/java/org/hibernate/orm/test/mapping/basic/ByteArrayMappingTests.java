@@ -49,7 +49,7 @@ import static org.hamcrest.Matchers.isOneOf;
 public class ByteArrayMappingTests {
 
 	@Test
-	@SkipForDialect(dialectClass = GaussDBDialect.class, reason = "Gaussdb does not support byte array operations through lob type")
+	@SkipForDialect(dialectClass = GaussDBDialect.class, reason = "GaussDB does not support byte array operations through lob type")
 	public void verifyMappings(SessionFactoryScope scope) {
 		final MappingMetamodelImplementor mappingMetamodel = scope.getSessionFactory()
 				.getRuntimeMetamodels()

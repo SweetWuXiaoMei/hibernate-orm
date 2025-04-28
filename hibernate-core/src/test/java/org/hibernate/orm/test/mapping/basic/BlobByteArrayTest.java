@@ -30,7 +30,7 @@ public class BlobByteArrayTest extends BaseEntityManagerFunctionalTestCase {
 	}
 
 	@Test
-	@SkipForDialect(dialectClass = GaussDBDialect.class, reason = "Gaussdb does not support byte array operations through lob type")
+	@SkipForDialect(dialectClass = GaussDBDialect.class, reason = "GaussDB does not support byte array operations through lob type")
 	public void test() {
 		Integer productId = doInJPA(this::entityManagerFactory, entityManager -> {
 			final Product product = new Product();
