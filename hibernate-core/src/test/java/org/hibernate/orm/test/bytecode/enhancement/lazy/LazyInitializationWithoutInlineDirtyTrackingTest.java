@@ -40,7 +40,7 @@ import org.junit.jupiter.api.Test;
 public class LazyInitializationWithoutInlineDirtyTrackingTest {
 
 	@Test
-	@SkipForDialect(dialectClass = GaussDBDialect.class, reason = "opengauss don't support")
+	@SkipForDialect(dialectClass = GaussDBDialect.class, reason = "Gaussdb don't support")
 	public void test(SessionFactoryScope scope) {
 		scope.inTransaction( s -> {
 			File file = new File();

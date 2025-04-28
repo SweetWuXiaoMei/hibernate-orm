@@ -43,7 +43,7 @@ import org.junit.jupiter.api.Test;
 public class LazyBasicFieldMergeTest {
 
 	@Test
-	@SkipForDialect(dialectClass = GaussDBDialect.class, reason = "opengauss don't support")
+	@SkipForDialect(dialectClass = GaussDBDialect.class, reason = "Gaussdb don't support")
 	public void test(SessionFactoryScope scope) {
 		scope.inTransaction( session -> {
 			Manager manager = new Manager();
