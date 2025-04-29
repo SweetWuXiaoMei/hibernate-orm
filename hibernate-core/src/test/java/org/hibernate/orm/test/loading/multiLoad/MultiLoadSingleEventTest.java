@@ -33,7 +33,7 @@ public class MultiLoadSingleEventTest extends BaseCoreFunctionalTestCase {
 
 			assertThat( events ).hasSize( 1 );
 			assertThat( events.get( 0 ) ).isNotNull();
-			assertThat( events ).extracting( "text" ).containsExactly( "text1" );
+			assertThat( events ).extracting( "text" ).containsExactlyInAnyOrder( "text1" );
 		} );
 	}
 
@@ -47,7 +47,7 @@ public class MultiLoadSingleEventTest extends BaseCoreFunctionalTestCase {
 
 			assertThat( events ).hasSize( 1 );
 			assertThat( events.get( 0 ) ).isNotNull();
-			assertThat( events ).extracting( "id" ).containsExactly( 1 );
+			assertThat( events ).extracting( "id" ).containsExactlyInAnyOrder( 1 );
 		} );
 	}
 

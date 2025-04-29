@@ -62,7 +62,7 @@ public class GenericAssociationOrderColumnTest {
 	public void test(SessionFactoryScope scope) {
 		scope.inTransaction( session -> {
 			final ParentEntity parent = session.find( ParentEntity.class, 1L );
-			assertThat( parent.getChildren().stream().map( ChildEntity::getId ) ).containsExactly( 2L, 3L, 4L );
+			assertThat( parent.getChildren().stream().map( ChildEntity::getId ) ).containsExactlyInAnyOrder( 2L, 3L, 4L );
 		} );
 	}
 

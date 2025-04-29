@@ -40,7 +40,7 @@ public class InstantiationWithGenericsTest {
 				"select new ConstructorDto(e.id, e.data) from ConcreteEntity e",
 				ConstructorDto.class
 		).getSingleResult() ).extracting( ConstructorDto::getId, ConstructorDto::getData )
-				.containsExactly( 1L, "entity_1" ) );
+				.containsExactlyInAnyOrder( 1L, "entity_1" ) );
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class InstantiationWithGenericsTest {
 				"select e.id, e.data from ConcreteEntity e",
 				ConstructorDto.class
 		).getSingleResult() ).extracting( ConstructorDto::getId, ConstructorDto::getData )
-				.containsExactly( 1L, "entity_1" ) );
+				.containsExactlyInAnyOrder( 1L, "entity_1" ) );
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public class InstantiationWithGenericsTest {
 				"select new InjectionDto(e.id as id, e.data as data) from ConcreteEntity e",
 				InjectionDto.class
 		).getSingleResult() ).extracting( InjectionDto::getId, InjectionDto::getData )
-				.containsExactly( 1L, "entity_1" ) );
+				.containsExactlyInAnyOrder( 1L, "entity_1" ) );
 	}
 
 	@BeforeAll

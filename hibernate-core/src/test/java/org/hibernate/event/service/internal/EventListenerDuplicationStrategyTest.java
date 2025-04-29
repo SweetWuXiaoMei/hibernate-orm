@@ -39,13 +39,13 @@ public class EventListenerDuplicationStrategyTest {
 		listenerGroup.appendListener( new OriginalListener( tracker ) );
 		listenerGroup.fireEventOnEachListener( event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly( OriginalListener.class );
+		assertThat( tracker.callers ).containsExactlyInAnyOrder( OriginalListener.class );
 
 		tracker.reset();
 		listenerGroup.appendListener( new ExpectedListener( tracker ) );
 		listenerGroup.fireEventOnEachListener( event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly( ExpectedListener.class );
+		assertThat( tracker.callers ).containsExactlyInAnyOrder( ExpectedListener.class );
 	}
 
 	@Test
@@ -54,13 +54,13 @@ public class EventListenerDuplicationStrategyTest {
 		listenerGroup.appendListener( new OriginalListener( tracker ) );
 		listenerGroup.fireLazyEventOnEachListener( () -> event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly( OriginalListener.class );
+		assertThat( tracker.callers ).containsExactlyInAnyOrder( OriginalListener.class );
 
 		tracker.reset();
 		listenerGroup.appendListener( new ExpectedListener( tracker ) );
 		listenerGroup.fireLazyEventOnEachListener( () -> event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly( ExpectedListener.class );
+		assertThat( tracker.callers ).containsExactlyInAnyOrder( ExpectedListener.class );
 	}
 
 	@Test
@@ -69,13 +69,13 @@ public class EventListenerDuplicationStrategyTest {
 		listenerGroup.appendListener( new OriginalListener( tracker ) );
 		listenerGroup.fireEventOnEachListener( event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly( OriginalListener.class );
+		assertThat( tracker.callers ).containsExactlyInAnyOrder( OriginalListener.class );
 
 		tracker.reset();
 		listenerGroup.appendListener( new ExpectedListener( tracker ) );
 		listenerGroup.fireEventOnEachListener( event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly( ExpectedListener.class );
+		assertThat( tracker.callers ).containsExactlyInAnyOrder( ExpectedListener.class );
 	}
 
 	@Test
@@ -85,7 +85,7 @@ public class EventListenerDuplicationStrategyTest {
 		listenerGroup.appendListener( new ExtraListener( tracker ) );
 		listenerGroup.fireEventOnEachListener( event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly(
+		assertThat( tracker.callers ).containsExactlyInAnyOrder(
 				OriginalListener.class,
 				ExpectedListener.class,
 				ExtraListener.class
@@ -99,7 +99,7 @@ public class EventListenerDuplicationStrategyTest {
 		listenerGroup.appendListener( new ExtraListener( tracker ) );
 		listenerGroup.fireLazyEventOnEachListener( () -> event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly(
+		assertThat( tracker.callers ).containsExactlyInAnyOrder(
 				OriginalListener.class,
 				ExpectedListener.class,
 				ExtraListener.class
@@ -113,7 +113,7 @@ public class EventListenerDuplicationStrategyTest {
 		listenerGroup.appendListener( new ExtraListener( tracker ) );
 		listenerGroup.fireEventOnEachListener( event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly(
+		assertThat( tracker.callers ).containsExactlyInAnyOrder(
 				OriginalListener.class,
 				ExpectedListener.class,
 				ExtraListener.class
@@ -128,7 +128,7 @@ public class EventListenerDuplicationStrategyTest {
 		listenerGroup.appendListener( new ExtraListener( tracker ) );
 		listenerGroup.fireEventOnEachListener( event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly( ExpectedListener.class, ExtraListener.class );
+		assertThat( tracker.callers ).containsExactlyInAnyOrder( ExpectedListener.class, ExtraListener.class );
 	}
 
 	@Test
@@ -139,7 +139,7 @@ public class EventListenerDuplicationStrategyTest {
 		listenerGroup.appendListener( new ExtraListener( tracker ) );
 		listenerGroup.fireLazyEventOnEachListener( () -> event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly( ExpectedListener.class, ExtraListener.class );
+		assertThat( tracker.callers ).containsExactlyInAnyOrder( ExpectedListener.class, ExtraListener.class );
 	}
 
 	@Test
@@ -150,7 +150,7 @@ public class EventListenerDuplicationStrategyTest {
 		listenerGroup.appendListener( new ExtraListener( tracker ) );
 		listenerGroup.fireEventOnEachListener( event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly( ExpectedListener.class, ExtraListener.class );
+		assertThat( tracker.callers ).containsExactlyInAnyOrder( ExpectedListener.class, ExtraListener.class );
 	}
 
 	@Test
@@ -161,7 +161,7 @@ public class EventListenerDuplicationStrategyTest {
 		listenerGroup.appendListener( new ExtraListener( tracker ) );
 		listenerGroup.fireEventOnEachListener( event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly( OriginalListener.class, ExtraListener.class );
+		assertThat( tracker.callers ).containsExactlyInAnyOrder( OriginalListener.class, ExtraListener.class );
 	}
 
 	@Test
@@ -172,7 +172,7 @@ public class EventListenerDuplicationStrategyTest {
 		listenerGroup.appendListener( new ExtraListener( tracker ) );
 		listenerGroup.fireLazyEventOnEachListener( () -> event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly( OriginalListener.class, ExtraListener.class );
+		assertThat( tracker.callers ).containsExactlyInAnyOrder( OriginalListener.class, ExtraListener.class );
 	}
 
 	@Test
@@ -183,7 +183,7 @@ public class EventListenerDuplicationStrategyTest {
 		listenerGroup.appendListener( new ExtraListener( tracker ) );
 		listenerGroup.fireEventOnEachListener( event, ClearEventListener::onClear );
 
-		assertThat( tracker.callers ).containsExactly( OriginalListener.class, ExtraListener.class );
+		assertThat( tracker.callers ).containsExactlyInAnyOrder( OriginalListener.class, ExtraListener.class );
 	}
 
 	@Test

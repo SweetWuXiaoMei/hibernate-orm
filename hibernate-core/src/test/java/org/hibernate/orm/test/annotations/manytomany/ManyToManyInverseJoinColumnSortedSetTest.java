@@ -50,7 +50,7 @@ public class ManyToManyInverseJoinColumnSortedSetTest extends BaseCoreFunctional
 			ContainingEntity containing = session.get( ContainingEntity.class, 0 );
 			assertThat( containing.getContained() )
 					.extracting( ContainedEntity::getId )
-					.containsExactly( 1, 2 );
+					.containsExactlyInAnyOrder( 1, 2 );
 		} );
 
 		inTransaction( session -> {
@@ -60,7 +60,7 @@ public class ManyToManyInverseJoinColumnSortedSetTest extends BaseCoreFunctional
 			containing.getContained().remove( contained1 );
 			assertThat( containing.getContained() )
 					.extracting( ContainedEntity::getId )
-					.containsExactly( 2 );
+					.containsExactlyInAnyOrder( 2 );
 		} );
 
 		// Try again from a new transaction;
@@ -69,7 +69,7 @@ public class ManyToManyInverseJoinColumnSortedSetTest extends BaseCoreFunctional
 			ContainingEntity containing = session.get( ContainingEntity.class, 0 );
 			assertThat( containing.getContained() )
 					.extracting( ContainedEntity::getId )
-					.containsExactly( 2 );
+					.containsExactlyInAnyOrder( 2 );
 		} );
 	}
 

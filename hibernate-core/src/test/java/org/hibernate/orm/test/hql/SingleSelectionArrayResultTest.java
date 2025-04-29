@@ -28,27 +28,27 @@ public class SingleSelectionArrayResultTest {
 			assertThat( session.createQuery(
 					"select 1",
 					Object[].class
-			).getSingleResult() ).containsExactly( 1 );
+			).getSingleResult() ).containsExactlyInAnyOrder( 1 );
 			assertThat( session.createQuery(
 					"select cast(1 as integer)",
 					Object[].class
-			).getSingleResult() ).containsExactly( 1 );
+			).getSingleResult() ).containsExactlyInAnyOrder( 1 );
 			assertThat( session.createSelectionQuery(
 					"select id from BasicEntity",
 					Object[].class
-			).getSingleResult() ).containsExactly( 1 );
+			).getSingleResult() ).containsExactlyInAnyOrder( 1 );
 			assertThat( session.createSelectionQuery(
 					"select cast(id as integer) from BasicEntity",
 					Object[].class
-			).getSingleResult() ).containsExactly( 1 );
+			).getSingleResult() ).containsExactlyInAnyOrder( 1 );
 			assertThat( session.createSelectionQuery(
 					"select ?1",
 					Object[].class
-			).setParameter( 1, 1 ).getSingleResult() ).containsExactly( 1 );
+			).setParameter( 1, 1 ).getSingleResult() ).containsExactlyInAnyOrder( 1 );
 			assertThat( session.createQuery(
 					"select cast(:p1 as integer)",
 					Object[].class
-			).setParameter( "p1", 1 ).getSingleResult() ).containsExactly( 1 );
+			).setParameter( "p1", 1 ).getSingleResult() ).containsExactlyInAnyOrder( 1 );
 		} );
 	}
 
