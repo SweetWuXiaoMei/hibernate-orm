@@ -79,7 +79,7 @@ public class ConvertedListAttributeQueryTest {
 			q.where( cb.equal( r.get( "id" ), 1 ) );
 			final Object result = session.createQuery( q ).getSingleResult();
 			assertThat( result ).isInstanceOf( Object[].class );
-			assertThat( ( (Object[]) result ) ).containsExactly( 1, 1 );
+			assertThat( ( (Object[]) result ) ).containsExactlyInAnyOrder( 1, 1 );
 		} );
 	}
 

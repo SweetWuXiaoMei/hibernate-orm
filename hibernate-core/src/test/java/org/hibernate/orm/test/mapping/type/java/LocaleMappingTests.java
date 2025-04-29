@@ -95,7 +95,7 @@ public class LocaleMappingTests {
 					.setParameter( 1, Locale.FRENCH )
 					.list() )
 					.extracting( LocaleMappingTestEntity::getId )
-					.containsExactly( 2 ) );
+					.containsExactlyInAnyOrder( 2 ) );
 		}
 		finally {
 			scope.inTransaction( session -> session.remove( entity ) );

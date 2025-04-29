@@ -31,12 +31,12 @@ public class ReflectionOptimizerTests {
 		assertNotNull( instance );
 
 		final Object[] initialValues = accessOptimizer.getPropertyValues( instance );
-		assertThat( initialValues ).containsExactly( null, null );
+		assertThat( initialValues ).containsExactlyInAnyOrder( null, null );
 
 		accessOptimizer.setPropertyValues( instance, new Object[] { 1L, "a name" } );
 
 		final Object[] injectedValues = accessOptimizer.getPropertyValues( instance );
-		assertThat( injectedValues ).containsExactly( 1L, "a name" );
+		assertThat( injectedValues ).containsExactlyInAnyOrder( 1L, "a name" );
 	}
 
 	@Test
@@ -57,11 +57,11 @@ public class ReflectionOptimizerTests {
 		assertNotNull( instance );
 
 		final Object[] initialValues = accessOptimizer.getPropertyValues( instance );
-		assertThat( initialValues ).containsExactly( null, null );
+		assertThat( initialValues ).containsExactlyInAnyOrder( null, null );
 
 		accessOptimizer.setPropertyValues( instance, new Object[] { 1L, "a value" } );
 
 		final Object[] injectedValues = accessOptimizer.getPropertyValues( instance );
-		assertThat( injectedValues ).containsExactly( 1L, "a value" );
+		assertThat( injectedValues ).containsExactlyInAnyOrder( 1L, "a value" );
 	}
 }

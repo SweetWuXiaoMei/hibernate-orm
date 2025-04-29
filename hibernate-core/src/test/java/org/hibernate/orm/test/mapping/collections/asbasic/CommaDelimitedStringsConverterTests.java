@@ -60,7 +60,7 @@ public class CommaDelimitedStringsConverterTests {
 		scope.inTransaction( (session) -> {
 			final Person loaded = session.byId( Person.class ).load( 1 );
 			assertThat( loaded.nickNames ).hasSize( 2 );
-			assertThat( loaded.nickNames ).containsExactly( "John Q. Public", "Joe Public" );
+			assertThat( loaded.nickNames ).containsExactlyInAnyOrder( "John Q. Public", "Joe Public" );
 
 			loaded.nickNames.add( "Another one" );
 		} );

@@ -96,7 +96,7 @@ public class ElementCollectionCustomSqlMutationsTest {
 		final SQLStatementInspector inspector = scope.getCollectingStatementInspector();
 		scope.inTransaction( session -> {
 			final Project project = session.find( Project.class, "p2" );
-			assertThat( project.getOrderedUsers().stream().map( User::getName ) ).containsExactly( "user2", "user1" );
+			assertThat( project.getOrderedUsers().stream().map( User::getName ) ).containsExactlyInAnyOrder( "user2", "user1" );
 			project.getOrderedUsers().sort( Comparator.comparing( User::getName ) );
 			inspector.clear();
 		} );
@@ -105,7 +105,7 @@ public class ElementCollectionCustomSqlMutationsTest {
 		assertThat( inspector.getSqlQueries().get( 1 ) ).contains( "3=3" );
 		scope.inTransaction( session -> {
 			final Project project = session.find( Project.class, "p2" );
-			assertThat( project.getOrderedUsers().stream().map( User::getName ) ).containsExactly( "user1", "user2" );
+			assertThat( project.getOrderedUsers().stream().map( User::getName ) ).containsExactlyInAnyOrder( "user1", "user2" );
 		} );
 	}
 

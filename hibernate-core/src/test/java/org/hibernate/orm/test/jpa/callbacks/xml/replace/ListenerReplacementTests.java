@@ -34,9 +34,9 @@ public class ListenerReplacementTests {
 		final Product product = new Product( 1, "987654321", 123 );
 		scope.inTransaction( (session) -> {
 			session.persist( product );
-			assertThat( product.getPrePersistCallbacks() ).containsExactly( LISTENER_ABC );
+			assertThat( product.getPrePersistCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
 		} );
-		assertThat( product.getPostPersistCallbacks() ).containsExactly( LISTENER_ABC );
+		assertThat( product.getPostPersistCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
 	}
 
 	@Test
@@ -50,14 +50,14 @@ public class ListenerReplacementTests {
 			session.persist( product );
 			session.persist( order );
 
-			assertThat( product.getPrePersistCallbacks() ).containsExactly( LISTENER_ABC );
-			assertThat( order.getPrePersistCallbacks() ).containsExactly( LISTENER_ABC );
-			assertThat( lineItem.getPrePersistCallbacks() ).containsExactly( LISTENER_BC );
+			assertThat( product.getPrePersistCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
+			assertThat( order.getPrePersistCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
+			assertThat( lineItem.getPrePersistCallbacks() ).containsExactlyInAnyOrder( LISTENER_BC );
 		} );
 
-		assertThat( product.getPostPersistCallbacks() ).containsExactly( LISTENER_ABC );
-		assertThat( order.getPostPersistCallbacks() ).containsExactly( LISTENER_ABC );
-		assertThat( lineItem.getPostPersistCallbacks() ).containsExactly( LISTENER_BC );
+		assertThat( product.getPostPersistCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
+		assertThat( order.getPostPersistCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
+		assertThat( lineItem.getPostPersistCallbacks() ).containsExactlyInAnyOrder( LISTENER_BC );
 	}
 
 	@Test
@@ -68,9 +68,9 @@ public class ListenerReplacementTests {
 		} );
 		scope.inTransaction( (session) -> {
 			session.remove( product );
-			assertThat( product.getPreRemoveCallbacks() ).containsExactly( LISTENER_ABC );
+			assertThat( product.getPreRemoveCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
 		} );
-		assertThat( product.getPostRemoveCallbacks() ).containsExactly( LISTENER_ABC );
+		assertThat( product.getPostRemoveCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
 	}
 
 	@Test
@@ -87,12 +87,12 @@ public class ListenerReplacementTests {
 
 		scope.inTransaction( (session) -> {
 			session.remove( order );
-			assertThat( order.getPreRemoveCallbacks() ).containsExactly( LISTENER_ABC );
-			assertThat( lineItem.getPreRemoveCallbacks() ).containsExactly( LISTENER_BC );
+			assertThat( order.getPreRemoveCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
+			assertThat( lineItem.getPreRemoveCallbacks() ).containsExactlyInAnyOrder( LISTENER_BC );
 		} );
 
-		assertThat( order.getPostRemoveCallbacks() ).containsExactly( LISTENER_ABC );
-		assertThat( lineItem.getPostRemoveCallbacks() ).containsExactly( LISTENER_BC );
+		assertThat( order.getPostRemoveCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
+		assertThat( lineItem.getPostRemoveCallbacks() ).containsExactlyInAnyOrder( LISTENER_BC );
 	}
 
 	@Test
@@ -114,8 +114,8 @@ public class ListenerReplacementTests {
 			return product;
 		} );
 
-		assertThat( updated.getPreUpdateCallbacks() ).containsExactly( LISTENER_ABC );
-		assertThat( updated.getPostUpdateCallbacks() ).containsExactly( LISTENER_ABC );
+		assertThat( updated.getPreUpdateCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
+		assertThat( updated.getPostUpdateCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
 	}
 
 	@Test
@@ -132,20 +132,20 @@ public class ListenerReplacementTests {
 
 		scope.inTransaction( (session) -> {
 			final Product product = session.find( Product.class, 1 );
-			assertThat( product.getPostLoadCallbacks() ).containsExactly( LISTENER_ABC );
+			assertThat( product.getPostLoadCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
 		} );
 
 		scope.inTransaction( (session) -> {
 			final List<Product> products = session.createSelectionQuery( "from Product", Product.class ).list();
 			products.forEach( (product) -> {
-				assertThat( product.getPostLoadCallbacks() ).containsExactly( LISTENER_ABC );
+				assertThat( product.getPostLoadCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
 			} );
 		} );
 
 		scope.inTransaction( (session) -> {
 			final LineItem lineItem = session.find( LineItem.class, 1 );
-			assertThat( lineItem.getPostLoadCallbacks() ).containsExactly( LISTENER_BC );
-			assertThat( lineItem.getOrder().getPostLoadCallbacks() ).containsExactly( LISTENER_ABC );
+			assertThat( lineItem.getPostLoadCallbacks() ).containsExactlyInAnyOrder( LISTENER_BC );
+			assertThat( lineItem.getOrder().getPostLoadCallbacks() ).containsExactlyInAnyOrder( LISTENER_ABC );
 		} );
 	}
 

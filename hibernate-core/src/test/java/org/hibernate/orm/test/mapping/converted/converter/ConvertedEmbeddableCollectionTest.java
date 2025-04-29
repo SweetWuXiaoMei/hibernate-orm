@@ -53,7 +53,7 @@ public class ConvertedEmbeddableCollectionTest {
 						.getEmbeddables()
 						.stream()
 						.map( TestEmbeddable::getData )
-		).containsExactly( "test" ) );
+		).containsExactlyInAnyOrder( "test" ) );
 	}
 
 	@Embeddable

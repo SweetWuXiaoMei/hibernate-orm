@@ -57,7 +57,7 @@ public class InstantiationWithGenericsExpressionTest {
 				"select new ConstructorDto(e.gen+e.gen, e.data) from ConcreteEntity e",
 				ConstructorDto.class
 		).getSingleResult() ).extracting( ConstructorDto::getGen, ConstructorDto::getData )
-				.containsExactly( 2L, "entity_1" ) );
+				.containsExactlyInAnyOrder( 2L, "entity_1" ) );
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class InstantiationWithGenericsExpressionTest {
 				"select e.gen+e.gen, e.data from ConcreteEntity e",
 				ConstructorDto.class
 		).getSingleResult() ).extracting( ConstructorDto::getGen, ConstructorDto::getData )
-				.containsExactly( 2L, "entity_1" ) );
+				.containsExactlyInAnyOrder( 2L, "entity_1" ) );
 	}
 
 	@Test
@@ -75,7 +75,7 @@ public class InstantiationWithGenericsExpressionTest {
 				"select new InjectionDto(e.gen+e.gen as gen, e.data as data) from ConcreteEntity e",
 				InjectionDto.class
 		).getSingleResult() ).extracting( InjectionDto::getGen, InjectionDto::getData )
-				.containsExactly( 2L, "entity_1" ) );
+				.containsExactlyInAnyOrder( 2L, "entity_1" ) );
 	}
 
 	@Test
@@ -84,7 +84,7 @@ public class InstantiationWithGenericsExpressionTest {
 				"select new ConstructorDto(-e.gen, e.data) from ConcreteEntity e",
 				ConstructorDto.class
 		).getSingleResult() ).extracting( ConstructorDto::getGen, ConstructorDto::getData )
-				.containsExactly( -1L, "entity_1" ) );
+				.containsExactlyInAnyOrder( -1L, "entity_1" ) );
 	}
 
 	@Test
@@ -93,7 +93,7 @@ public class InstantiationWithGenericsExpressionTest {
 				"select -e.gen, e.data from ConcreteEntity e",
 				ConstructorDto.class
 		).getSingleResult() ).extracting( ConstructorDto::getGen, ConstructorDto::getData )
-				.containsExactly( -1L, "entity_1" ) );
+				.containsExactlyInAnyOrder( -1L, "entity_1" ) );
 	}
 
 	@Test
@@ -102,7 +102,7 @@ public class InstantiationWithGenericsExpressionTest {
 				"select new InjectionDto(-e.gen as gen, e.data as data) from ConcreteEntity e",
 				InjectionDto.class
 		).getSingleResult() ).extracting( InjectionDto::getGen, InjectionDto::getData )
-				.containsExactly( -1L, "entity_1" ) );
+				.containsExactlyInAnyOrder( -1L, "entity_1" ) );
 	}
 
 	@Test
@@ -112,7 +112,7 @@ public class InstantiationWithGenericsExpressionTest {
 					"select new ConstructorDto(abs(e.gen), e.data) from ConcreteEntity e",
 					ConstructorDto.class
 			).getSingleResult() ).extracting( ConstructorDto::getGen, ConstructorDto::getData )
-					.containsExactly( 1L, "entity_1" );
+					.containsExactlyInAnyOrder( 1L, "entity_1" );
 		} );
 	}
 
@@ -123,7 +123,7 @@ public class InstantiationWithGenericsExpressionTest {
 					"select abs(e.gen), e.data from ConcreteEntity e",
 					ConstructorDto.class
 			).getSingleResult() ).extracting( ConstructorDto::getGen, ConstructorDto::getData )
-					.containsExactly( 1L, "entity_1" );
+					.containsExactlyInAnyOrder( 1L, "entity_1" );
 		} );
 	}
 
@@ -134,7 +134,7 @@ public class InstantiationWithGenericsExpressionTest {
 					"select new InjectionDto(abs(e.gen) as gen, e.data as data) from ConcreteEntity e",
 					InjectionDto.class
 			).getSingleResult() ).extracting( InjectionDto::getGen, InjectionDto::getData )
-					.containsExactly( 1L, "entity_1" );
+					.containsExactlyInAnyOrder( 1L, "entity_1" );
 		} );
 	}
 

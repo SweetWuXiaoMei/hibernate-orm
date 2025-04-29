@@ -111,7 +111,7 @@ public class MappedByEmbeddableTest extends BaseCoreFunctionalTestCase {
 		);
 
 		query.setParameter( "data", data );
-		assertThat( query.getResultList() ).extracting( "id" ).containsExactly( id );
+		assertThat( query.getResultList() ).extracting( "id" ).containsExactlyInAnyOrder( id );
 	}
 
 	private void loadContaining(Session session, Integer containingId, Integer containedId) {
