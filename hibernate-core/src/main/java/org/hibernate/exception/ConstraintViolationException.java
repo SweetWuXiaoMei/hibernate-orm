@@ -58,8 +58,44 @@ public class ConstraintViolationException extends JDBCException {
 		return kind;
 	}
 
+	/**
+	 * Enumerates the kinds of integrity constraint violation recognized
+	 * by Hibernate.
+	 */
 	public enum ConstraintKind {
+		/**
+		 * A {@code not null} constraint violation.
+		 *
+		 * @apiNote The {@linkplain #getConstraintName constraint name}
+		 *          in this case is usually just the column name.
+		 *
+		 * @see jakarta.persistence.Column#nullable
+		 */
+		NOT_NULL,
+		/**
+		 * A {@code unique} or {@code primary key} constraint violation.
+		 *
+		 * @see jakarta.persistence.Column#unique
+		 * @see jakarta.persistence.Table#uniqueConstraints
+		 */
 		UNIQUE,
+		/**
+		 * A {@code foreign key} constraint violation.
+		 *
+		 * @see jakarta.persistence.JoinColumn#foreignKey
+		 * @see jakarta.persistence.JoinTable#foreignKey
+		 */
+		FOREIGN_KEY,
+		/**
+		 * A {@code check} constraint violation.
+		 *
+		 * @see jakarta.persistence.Column#check
+		 * @see jakarta.persistence.Table#check
+		 */
+		CHECK,
+		/**
+		 * A constraint violation whose kind was unknown or unrecognized.
+		 */
 		OTHER
 	}
 }
